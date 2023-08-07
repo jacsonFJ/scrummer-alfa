@@ -1,10 +1,8 @@
-import Login from './Pages/Login';
+import Signup from './Pages/Signup';
 import './styles.css';
 
 export default function App() {
   return (
-    <>
-      <Login />
-    </>
+    <Signup />
   );
 }

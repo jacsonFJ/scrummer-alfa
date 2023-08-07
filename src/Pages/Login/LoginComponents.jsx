@@ -65,11 +65,11 @@ const Botton = styled.div`
   margin-top: 76px;
 `;
 
-export function LoginHeader() {
+export function LoginHeader(props) {
   return (
     <Header>
       <LogoImage src={logo} alt="Logotipo Scrummer" />
-      <Title>Login no Scrummer</Title>
+      <Title>{props.title}</Title>
     </Header>
   );
 }

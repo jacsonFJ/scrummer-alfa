@@ -1,29 +1,32 @@
 import InputField from "../../Components/Forms/InputField";
 import InputText from "../../Components/Forms/InputText";
-import { Anchor, Block, Form, LoginHeader, ScrummerBotton } from "./LoginComponents";
+import { Anchor, Block, Form, LoginHeader, ScrummerBotton } from "../Login/LoginComponents";
 import { ButtonSuccess } from "../../Components/Buttons";
 
 
-export default function Login() {
+export default function Signup() {
   return (
     <>
-      <LoginHeader title="Login no Scrummer" />
+      <LoginHeader title="Cadastre-se no Scrummer" />
       <Form>
+        <InputField title="Nome">
+          <InputText />
+        </InputField>
         <InputField title="E-mail">
           <InputText />
         </InputField>
         <InputField title="Senha">
-          <InputText value="****" />
+          <InputText />
+        </InputField>
+        <InputField title="Confirmar senha">
+          <InputText />
         </InputField>
         <ButtonSuccess width="100%">
-          Acessar
+          Confirmar
         </ButtonSuccess>
-        <Anchor href="#">
-          Esqueci minha senha!
-        </Anchor>
       </Form>
       <Block>
-        Novo no Scrummer? <Anchor href="#">Crie sua Conta</Anchor>
+        Já possui conta no Scrummer? <Anchor href="#">Login</Anchor>
       </Block>
       <ScrummerBotton />
     </>
