@@ -1,6 +1,6 @@
 import InputField from "../../Components/Forms/InputField";
 import InputText from "../../Components/Forms/InputText";
-import { Anchor, Block, Form, LoginHeader, ScrummerBotton } from "../Login/LoginComponents";
+import { LoginAnchor, Block, Form, LoginHeader, ScrummerBotton } from "../Login/LoginComponents";
 import { ButtonSuccess } from "../../Components/Buttons";
 
 
@@ -26,7 +26,7 @@ export default function Signup() {
         </ButtonSuccess>
       </Form>
       <Block>
-        Já possui conta no Scrummer? <Anchor href="#">Login</Anchor>
+        Já possui conta no Scrummer? <LoginAnchor to="/login">Login</LoginAnchor>
       </Block>
       <ScrummerBotton />
     </>

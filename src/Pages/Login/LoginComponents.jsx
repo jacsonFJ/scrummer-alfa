@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 
 import logo from '../../assets/logo-scrummer.png';
 import Colors from '../../Colors';
+import { Link } from 'react-router-dom';
 
 const Header = styled.div`
   margin-top: 32px;
@@ -50,7 +51,7 @@ export const Block = styled.div`
   margin-top: 34px;
 `;
 
-export const Anchor = styled.a`
+export const LoginAnchor = styled(Link)`
   color: ${Colors.neutral500};
   font-size: 16px;
   text-decoration: none;

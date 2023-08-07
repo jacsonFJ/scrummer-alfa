@@ -1,6 +1,6 @@
 import InputField from "../../Components/Forms/InputField";
 import InputText from "../../Components/Forms/InputText";
-import { Anchor, Block, Form, LoginHeader, ScrummerBotton } from "./LoginComponents";
+import { Block, Form, LoginAnchor, LoginHeader, ScrummerBotton } from "./LoginComponents";
 import { ButtonSuccess } from "../../Components/Buttons";
 
 
@@ -18,12 +18,12 @@ export default function Login() {
         <ButtonSuccess width="100%">
           Acessar
         </ButtonSuccess>
-        <Anchor href="#">
+        <LoginAnchor href="#">
           Esqueci minha senha!
-        </Anchor>
+        </LoginAnchor>
       </Form>
       <Block>
-        Novo no Scrummer? <Anchor href="#">Crie sua Conta</Anchor>
+        Novo no Scrummer? <LoginAnchor to="/cadastrese">Crie sua Conta</LoginAnchor>
       </Block>
       <ScrummerBotton />
     </>
