@@ -18,7 +18,7 @@ export default function Login() {
         <ButtonSuccess width="100%">
           Acessar
         </ButtonSuccess>
-        <LoginAnchor href="#">
+        <LoginAnchor to={"/projetos"}>
           Esqueci minha senha!
         </LoginAnchor>
       </Form>
