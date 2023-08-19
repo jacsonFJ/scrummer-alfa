@@ -6,6 +6,7 @@ const Colors = {
   secondary900: '#3C4549',
   success500: '#00C853',
   success700: '#008E3B',
+  neutral50: '#E6F4FD',
   neutral500: '#0091EA',
   danger500: '#B71C1C',
   danger700: '#821414',
