@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 
 import Colors from '../../Colors';
 import { Link } from "react-router-dom";
@@ -65,6 +65,22 @@ export const HeaderLink = styled(Link)`
   font-size: 16px;
   font-weight: 600;
   text-decoration: none;
+  position: relative;
+
+  ${props => {
+    if (props.checked) {
+      return css`&::before {
+        content: "";
+        display: block;
+        width: 110%;
+        height: 2px;
+        background-color: #FF7556;
+        position: absolute;
+        bottom: -1px;
+      }`;
+    }
+  }}
+
   svg {
     width: 20px;
     height: 20px;

@@ -14,7 +14,7 @@ export function Header() {
           <h1>Projetos</h1>
         </IconBlock>
         <LinksList>
-          <HeaderLink to="/">
+          <HeaderLink to="/" checked>
             <FiRotateCw />
             Em progresso
           </HeaderLink>
