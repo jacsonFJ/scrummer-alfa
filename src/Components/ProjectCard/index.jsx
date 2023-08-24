@@ -1,13 +1,15 @@
 import { FiList } from 'react-icons/fi';
 
-import { CardContainer, CardFooter } from "./styles";
+import { CardContainer, CardFooter, CardTitle } from "./styles";
 import { TagBlue } from '../Tags';
 import { ImgCircle } from "../Images";
 
 export default function ProjectCard() {
   return (
     <CardContainer>
-      <h2>Nome do projeto</h2>
+      <CardTitle to="/projetos/detalhes">
+        Nome do projeto
+      </CardTitle>
       <p>
         Descrição do projeto que pode ser um pouco longa, porém é limitada, mas pode quebrar até uma linha , por isso vou seguir escrevendo pra ter duas linhas.
       </p>

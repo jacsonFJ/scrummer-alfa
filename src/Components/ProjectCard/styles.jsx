@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+
 import Colors from "../../Colors";
 
 export const CardContainer = styled.div`
@@ -8,19 +10,20 @@ export const CardContainer = styled.div`
   align-items: flex-start;
   gap: 8px;
 
-  h2 {
-    color: ${Colors.neutral500};
-    font-size: 20px;
-    font-weight: 700;
-    margin: 0px;
-  }
-
   p {
     color: ${Colors.secondary900};
     font-size: 12px;
     font-weight: 400;
     margin: 0px;
   }
+`;
+
+export const CardTitle = styled(Link)`
+  color: ${Colors.neutral500};
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0px;
+  text-decoration: none;
 `;
 
 export const CardFooter = styled.div`
