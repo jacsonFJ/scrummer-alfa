@@ -21,24 +21,8 @@ export const HeaderBlock = styled.div`
 export const IconBlock = styled.header`
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: 24px;
   margin-top: 20px;
-
-  div {
-    width: 100px;
-    height: 100px;
-    border-radius: 6px;
-    border: 1px solid ${Colors.secondary200};
-    background: #FFF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    svg {
-      width: 60px;
-      height: 60px;
-      color: ${Colors.secondary900};
-    }
-  }
 
   h1 {
     color: ${Colors.secondary900};
@@ -46,6 +30,18 @@ export const IconBlock = styled.header`
     font-weight: 700;
     line-height: normal;
   }
+`;
+
+export const IconBox = styled.div`
+  width: 100px;
+  height: 100px;
+  border-radius: 6px;
+  border: 1px solid ${Colors.secondary200};
+  background: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${Colors.secondary900};
 `;
 
 export const LinksList = styled.div`

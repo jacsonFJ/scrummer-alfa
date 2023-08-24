@@ -1,16 +1,16 @@
 import { FaRegFolderClosed } from 'react-icons/fa6';
 import { FiCheckSquare, FiClipboard, FiRotateCw } from 'react-icons/fi';
 
-import { HeaderBlock, HeaderLink, IconBlock, LinksList } from './styles';
+import { HeaderBlock, HeaderLink, IconBlock, IconBox, LinksList } from './styles';
 
 export function Header() {
   return (
     <HeaderBlock>
       <div id="header-container">
         <IconBlock>
-          <div>
-            <FaRegFolderClosed />
-          </div>
+          <IconBox>
+            <FaRegFolderClosed size={60} />
+          </IconBox>
           <h1>Projetos</h1>
         </IconBlock>
         <LinksList>

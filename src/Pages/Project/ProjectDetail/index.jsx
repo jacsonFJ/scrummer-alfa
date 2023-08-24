@@ -5,11 +5,13 @@ import Navbar from '../../../Components/Navbar/index';
 import { ImgCircle } from '../../../Components/Images';
 import { TagBlue } from '../../../Components/Tags';
 import Colors from '../../../Colors';
+import HeaderProject from '../../../Components/HeaderProject';
 
 export default function ProjectDetail() {
   return (
     <>
       <Navbar />
+      <HeaderProject />
       <ProjectContainer>
         <Description>
           <DescriptionTitle>
