@@ -30,7 +30,7 @@ export default function ProjectDetail() {
         </Description>
         <div style={{display: 'flex', flexDirection: 'column'}}>
           <Participants>
-            <SectionTitle>
+            <SectionTitle to="/projetos/usuarios">
               Participantes
             </SectionTitle>
             <div className='participant'>
@@ -55,7 +55,7 @@ export default function ProjectDetail() {
             </div>
           </Participants>
           <Participants style={{borderBottom: `1px solid ${Colors.secondary200}`}}>
-            <SectionTitle>
+            <SectionTitle to="#">
               Últimos Itens
             </SectionTitle>
             <ItemsList>

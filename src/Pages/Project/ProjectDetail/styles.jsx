@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Colors from '../../../Colors';
 
@@ -59,11 +60,12 @@ export const Participants = styled.div`
   }
 `;
 
-export const SectionTitle = styled.h2`
+export const SectionTitle = styled(Link)`
   color: ${Colors.secondary900};
   font-size: 16px;
   font-weight: 600;
   margin: 0px;
+  text-decoration: none;
 `;
 
 export const ItemsList = styled.ul`
