@@ -6,6 +6,7 @@ import Login from './Pages/Login';
 import ProjectsList from './Pages/Project/ProjectsList';
 import ProjectDetail from './Pages/Project/ProjectDetail';
 import ProjectUsers from './Pages/Project/ProjectUsers';
+import ProductBacklog from './Pages/Project/ProductBacklog';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/projetos" element={<ProjectsList />} />
         <Route path="/projetos/detalhes" element={<ProjectDetail />} />
         <Route path='/projetos/usuarios' element={<ProjectUsers />} />
+        <Route path='/projetos/product-backlog' element={<ProductBacklog />} />
       </Routes>
     </BrowserRouter>
   );

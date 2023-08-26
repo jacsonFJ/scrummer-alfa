@@ -29,11 +29,11 @@ export default function HeaderProject() {
           </BtnDropDown>
         </IconBlock>
         <LinksList>
-          <HeaderLink to="/" checked>
+          <HeaderLink to="/projetos/detalhes" checked>
             <FiActivity />
             Visão geral
           </HeaderLink>
-          <HeaderLink to="/">
+          <HeaderLink to="/projetos/product-backlog">
             <FiAlignJustify />
             Product Backlog
           </HeaderLink>
