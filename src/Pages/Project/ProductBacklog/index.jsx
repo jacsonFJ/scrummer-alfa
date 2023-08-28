@@ -1,8 +1,10 @@
-import { BacklogContainer } from "./styles";
+import { BacklogContainer, BacklogList } from "./styles";
 import { ButtonSuccess } from '../../../Components/Buttons';
 import Navbar from '../../../Components/Navbar/index';
 import HeaderProject from '../../../Components/HeaderProject/index';
 import ItemsFilter from "../../../Components/ItemsFilter";
+import { ItemBacklogLarge } from "../../../Components/ListItems";
+import Paginator from '../../../Components/Paginator/index';
 
 export default function ProductBacklog() {
   return (
@@ -13,8 +15,18 @@ export default function ProductBacklog() {
         <ButtonSuccess>
           Adicionar Item
         </ButtonSuccess>
-        <ItemsFilter />
+        <BacklogList>
+          <ItemsFilter />
+          <ItemBacklogLarge />
+          <ItemBacklogLarge />
+          <ItemBacklogLarge />
+          <ItemBacklogLarge />
+          <ItemBacklogLarge />
+          <ItemBacklogLarge />
+          <ItemBacklogLarge />
+        </BacklogList>
       </BacklogContainer>
+      <Paginator />
     </>
   );
 }

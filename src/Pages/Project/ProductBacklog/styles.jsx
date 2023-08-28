@@ -5,6 +5,12 @@ export const BacklogContainer = styled.div`
   flex-direction: column;
   align-items: flex-end;
   gap: 20px;
-  margin: 20px 0px;
+  margin-top: 20px;
   width: 890px;
+`;
+
+export const BacklogList = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
