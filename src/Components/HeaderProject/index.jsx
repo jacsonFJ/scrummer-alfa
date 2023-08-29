@@ -37,7 +37,7 @@ export default function HeaderProject() {
             <FiAlignJustify />
             Product Backlog
           </HeaderLink>
-          <HeaderLink to="/">
+          <HeaderLink to="/projetos/sprint-backlog">
             <FiList />
             Sprint Backlog
           </HeaderLink>
