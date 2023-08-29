@@ -41,7 +41,7 @@ export default function HeaderProject() {
             <FiList />
             Sprint Backlog
           </HeaderLink>
-          <HeaderLink to="/">
+          <HeaderLink to="/projetos/increment-on-software">
             <FiCheckSquare />
             Increment on Software
           </HeaderLink>

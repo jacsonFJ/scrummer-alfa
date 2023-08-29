@@ -1,4 +1,4 @@
-import { FiMessageSquare } from 'react-icons/fi';
+import { FiAlignJustify, FiMessageSquare } from 'react-icons/fi';
 
 import { ImgCircle } from "../Images";
 import { BacklogInfo, ItemBlock, ItemContainer } from "./styles";
@@ -27,6 +27,27 @@ export function ItemBacklogLarge() {
         <span className="bottom-line">
           Alterado em 23/07/2023
         </span>
+      </ItemBlock>
+    </ItemContainer>
+  );
+}
+
+export function ItemIncrement() {
+  return (
+    <ItemContainer>
+      <ItemBlock>
+        <h3>Este é o título do item do backlog</h3>
+        <span className="bottom-line">
+          #223 - Criado em 22/07/2023 Por Jacon Feuser Joaquim
+        </span>
+      </ItemBlock>
+      <ItemBlock right>
+        <BacklogInfo>
+          <div className="item-notes">
+            <FiAlignJustify size={16} />
+            6
+          </div>
+        </BacklogInfo>
       </ItemBlock>
     </ItemContainer>
   );

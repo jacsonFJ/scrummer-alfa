@@ -6,7 +6,7 @@ export const ItemContainer = styled.div`
   width: 890px;
   padding: 12px 20px;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   border-bottom: 1px solid ${Colors.secondary200};
 `;
 
