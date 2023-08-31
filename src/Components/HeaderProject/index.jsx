@@ -25,7 +25,7 @@ export default function HeaderProject() {
           </IconBox>
           <h1>Nome do projeto</h1>
           <BtnDropDown>
-            <TbTriangleInvertedFilled size={20} />
+            <TbTriangleInvertedFilled size={16} />
           </BtnDropDown>
         </IconBlock>
         <LinksList>

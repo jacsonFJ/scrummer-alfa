@@ -8,6 +8,7 @@ const Colors = {
   success500: '#00C853',
   success700: '#008E3B',
   neutral50: '#E6F4FD',
+  neutral200: '#8ACCF5',
   neutral500: '#0091EA',
   danger50: '#F8E8E8',
   danger200: '#DE9797',

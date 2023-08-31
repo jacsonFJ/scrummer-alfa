@@ -1,4 +1,5 @@
 import { FiAlignJustify, FiMessageSquare } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 import { ImgCircle } from "../Images";
 import { BacklogInfo, ItemBlock, ItemContainer } from "./styles";
@@ -7,7 +8,7 @@ export function ItemBacklogLarge() {
   return (
     <ItemContainer>
       <ItemBlock>
-        <h3>Este é o título do item do backlog</h3>
+        <Link className='item-title' to='/projetos/item'>Este é o título do item do backlog</Link>
         <span className="bottom-line">
           #223 - Criado em 22/07/2023 Por Jacon Feuser Joaquim
         </span>
@@ -36,7 +37,7 @@ export function ItemIncrement() {
   return (
     <ItemContainer>
       <ItemBlock>
-        <h3>Este é o título do item do backlog</h3>
+        <Link className='item-title' to='/projetos/item'>Este é o título do item do backlog</Link>
         <span className="bottom-line">
           #223 - Criado em 22/07/2023 Por Jacon Feuser Joaquim
         </span>

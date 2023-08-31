@@ -9,6 +9,7 @@ import ProjectUsers from './Pages/Project/ProjectUsers';
 import ProductBacklog from './Pages/Project/ProductBacklog';
 import SprintBacklog from './Pages/Project/SprintBacklog';
 import IncrementOnSoftware from './Pages/Project/IncrementOnSoftware';
+import BacklogItem from './Pages/Project/BacklogItem';
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Route path='/projetos/product-backlog' element={<ProductBacklog />} />
         <Route path='/projetos/sprint-backlog' element={<SprintBacklog />} />
         <Route path='/projetos/increment-on-software' element={<IncrementOnSoftware />} />
+        <Route path='/projetos/item' element={<BacklogItem />} />
       </Routes>
     </BrowserRouter>
   );

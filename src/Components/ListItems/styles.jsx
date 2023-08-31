@@ -16,11 +16,12 @@ export const ItemBlock = styled.div`
   align-items: ${props => props.right ? 'flex-end' : 'flex-start'};
   gap: 8px;
 
-  h3 {
+  .item-title {
     color: ${Colors.secondary900};
     font-size: 16px;
     font-weight: 600;
     margin: 0px;
+    text-decoration: none;
   }
 
   .bottom-line {
