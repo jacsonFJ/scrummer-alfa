@@ -1,11 +1,12 @@
 import Navbar from '../../../Components/Navbar/index';
 import HeaderProject from '../../../Components/HeaderProject/index';
-import { BacklogItemContainer, ItemDescription, ItemTitle, LeftEvents, LeftSide, Participant, ParticipantRow, RightRow, RightSide, RightTitle, Row40, Row5, UsersList } from './styles';
-import { ButtonDanger, ButtonPlus, ButtonTrash } from '../../../Components/Buttons';
+import { BacklogItemContainer, CommentArea, ItemDescription, ItemTitle, LeftEvents, LeftSide, Participant, ParticipantRow, RightRow, RightSide, RightTitle, Row40, Row5, UsersList } from './styles';
+import { ButtonDanger, ButtonPlus, ButtonTrash, ButtonWhite } from '../../../Components/Buttons';
 import { ImgCircle } from '../../../Components/Images';
 import InputSelect from '../../../Components/Forms/InputSelect';
 import HistoryEvent from '../../../Components/HistoryEvent';
 import Note from '../../../Components/Note';
+import InputTextArea from '../../../Components/Forms/InputTextArea';
 
 export default function BacklogItem() {
   return (
@@ -42,6 +43,12 @@ export default function BacklogItem() {
                 <strong>Jacson</strong>  editou a descrição em <strong>04/06/2023 12:43</strong>
               </HistoryEvent>
             </LeftEvents>
+            <CommentArea>
+              <InputTextArea placeholder="Comentar..." style={{minHeight: '67px'}} />
+              <ButtonWhite>
+                Comentar
+              </ButtonWhite>
+            </CommentArea>
           </LeftSide>
           <RightSide>
             <RightRow>

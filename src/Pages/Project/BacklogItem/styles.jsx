@@ -65,6 +65,15 @@ export const LeftEvents = styled.div`
   }
 `;
 
+export const CommentArea = styled.div`
+  width: 100%;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-content: flex-start;
+`;
+
 export const ItemDescription = styled.p`
   display: flex;
   width: 100%;
