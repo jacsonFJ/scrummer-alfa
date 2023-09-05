@@ -33,6 +33,19 @@ export function ItemBacklogLarge() {
   );
 }
 
+export function ItemBacklogSmall() {
+  return (
+    <ItemContainer style={{width: '445px'}}>
+      <ItemBlock>
+        <Link className='item-title' to='/projetos/item'>Este é o título do item do backlog</Link>
+        <span className="bottom-line">
+          #223 - Criado em 22/07/2023 Por Jacon Feuser Joaquim
+        </span>
+      </ItemBlock>
+    </ItemContainer>
+  );
+}
+
 export function ItemIncrement() {
   return (
     <ItemContainer>

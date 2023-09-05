@@ -8,10 +8,11 @@ export const TitleRow = styled.div`
   align-items: center;
   width: 100%;
   
-  h2 {
+  a {
     color: ${Colors.secondary900};
     font-size: 20px;
     font-weight: 700;
     margin: 0px;
+    text-decoration: none;
   }
 `;

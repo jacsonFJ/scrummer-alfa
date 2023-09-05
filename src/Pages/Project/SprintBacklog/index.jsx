@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import HeaderProject from "../../../Components/HeaderProject";
 import Navbar from "../../../Components/Navbar";
 import { BacklogContainer, BacklogList } from '../ProductBacklog/styles';
@@ -14,7 +16,9 @@ export default function SprintBacklog() {
       <HeaderProject />
       <BacklogContainer>
         <TitleRow>
-          <h2>Sprint #9 - Título da sprint</h2>
+          <Link to="/projetos/sprint">
+            Sprint #9 - Título da sprint
+          </Link>
           <ButtonDanger>
             Encerrar Sprint
           </ButtonDanger>
