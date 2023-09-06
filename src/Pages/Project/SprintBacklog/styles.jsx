@@ -16,3 +16,12 @@ export const TitleRow = styled.div`
     text-decoration: none;
   }
 `;
+
+export const NoSprint = styled.p`
+  color: ${Colors.secondary700};
+  font-size: 25px;
+  font-weight: 700;
+  width: 100%;
+  text-align: center;
+  margin-top: 200px;
+`;
