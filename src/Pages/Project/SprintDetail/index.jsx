@@ -29,11 +29,11 @@ export default function SprintDetail() {
               </div>
               <ButtonPlus />
             </CardListTitle>
-            <ItemBacklogSmall />
-            <ItemBacklogSmall />
-            <ItemBacklogSmall />
-            <ItemBacklogSmall />
-            <ItemBacklogSmall />
+            <ItemBacklogSmall to='/projetos/item' />
+            <ItemBacklogSmall to='/projetos/item' />
+            <ItemBacklogSmall to='/projetos/item' />
+            <ItemBacklogSmall to='/projetos/item' />
+            <ItemBacklogSmall to='/projetos/item' />
             <CardListBottom>
               <PaginatorSmall />
             </CardListBottom>
@@ -46,11 +46,11 @@ export default function SprintDetail() {
               </div>
               <ButtonPlus />
             </CardListTitle>
-            <ItemBacklogSmall />
-            <ItemBacklogSmall />
-            <ItemBacklogSmall />
-            <ItemBacklogSmall />
-            <ItemBacklogSmall />
+            <ItemBacklogSmall to='/projetos/reunioes' />
+            <ItemBacklogSmall to='/projetos/reunioes' />
+            <ItemBacklogSmall to='/projetos/reunioes' />
+            <ItemBacklogSmall to='/projetos/reunioes' />
+            <ItemBacklogSmall to='/projetos/reunioes' />
             <CardListBottom>
               <PaginatorSmall />
             </CardListBottom>

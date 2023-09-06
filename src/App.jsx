@@ -11,6 +11,7 @@ import SprintBacklog from './Pages/Project/SprintBacklog';
 import IncrementOnSoftware from './Pages/Project/IncrementOnSoftware';
 import BacklogItem from './Pages/Project/BacklogItem';
 import SprintDetail from './Pages/Project/SprintDetail';
+import Meeting from './Pages/Project/Meeting';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
         <Route path='/projetos/increment-on-software' element={<IncrementOnSoftware />} />
         <Route path='/projetos/item' element={<BacklogItem />} />
         <Route path='/projetos/sprint' element={<SprintDetail />} />
+        <Route path='/projetos/reunioes' element={<Meeting />} />
       </Routes>
     </BrowserRouter>
   );
