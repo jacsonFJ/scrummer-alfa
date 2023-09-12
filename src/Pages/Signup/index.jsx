@@ -1,7 +1,7 @@
 import InputField from "../../Components/Forms/InputField";
-import InputText from "../../Components/Forms/InputText";
 import { LoginAnchor, Block, Form, LoginHeader, ScrummerBotton } from "../Login/LoginComponents";
 import { ButtonSuccess } from "../../Components/Buttons";
+import { Input } from "../../Components/Forms/InputText";
 
 
 export default function Signup() {
@@ -10,16 +10,16 @@ export default function Signup() {
       <LoginHeader title="Cadastre-se no Scrummer" />
       <Form>
         <InputField title="Nome">
-          <InputText />
+          <Input />
         </InputField>
         <InputField title="E-mail">
-          <InputText />
+          <Input />
         </InputField>
         <InputField title="Senha">
-          <InputText />
+          <Input />
         </InputField>
         <InputField title="Confirmar senha">
-          <InputText />
+          <Input />
         </InputField>
         <ButtonSuccess width="100%">
           Confirmar

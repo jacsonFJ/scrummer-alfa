@@ -10,7 +10,9 @@ export default function Navbar() {
   return (
     <NavbarBlock>
       <NavbarContainer>
-        <LogoImage src={icon} title="Logo Scrummer" />
+        <LogoImage to='/projetos'>
+          <img src={icon} title="Scrummer" />
+        </LogoImage>
         <RightGroup>
           <div>
             <FiBell className="navbar-icon" />

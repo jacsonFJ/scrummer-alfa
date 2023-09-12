@@ -1,21 +1,29 @@
+import { useForm } from 'react-hook-form';
+
 import InputField from "../../Components/Forms/InputField";
-import InputText from "../../Components/Forms/InputText";
+import { Input } from "../../Components/Forms/InputText";
 import { Block, Form, LoginAnchor, LoginHeader, ScrummerBotton } from "./LoginComponents";
 import { ButtonSuccess } from "../../Components/Buttons";
 
 
 export default function Login() {
+  const {register, handleSubmit} = useForm();
+
+  const subtmitAction = (data) => {
+    alert(JSON.stringify(data));
+  };
+
   return (
     <>
       <LoginHeader title="Login no Scrummer" />
-      <Form>
+      <Form onSubmit={handleSubmit(subtmitAction)}>
         <InputField title="E-mail">
-          <InputText />
+          <Input {...register('email')} />
         </InputField>
         <InputField title="Senha">
-          <InputText value="****" />
+          <Input type="password" {...register('password')} />
         </InputField>
-        <ButtonSuccess width="100%">
+        <ButtonSuccess width="100%" type="submit">
           Acessar
         </ButtonSuccess>
         <LoginAnchor to={"/projetos"}>

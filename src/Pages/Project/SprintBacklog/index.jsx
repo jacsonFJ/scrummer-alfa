@@ -27,7 +27,7 @@ export default function SprintBacklog() {
         <>
           <BacklogContainer>
             <TitleRow>
-              <Link to="/projetos/sprint">
+              <Link to="/projetos/teste/sprint">
                 Sprint #9 - Título da sprint
               </Link>
               <ButtonDanger>

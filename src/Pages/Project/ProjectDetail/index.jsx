@@ -30,7 +30,7 @@ export default function ProjectDetail() {
         </Description>
         <div style={{display: 'flex', flexDirection: 'column'}}>
           <Participants>
-            <SectionTitle to="/projetos/usuarios">
+            <SectionTitle to="/projetos/teste/usuarios">
               Participantes
             </SectionTitle>
             <div className='participant'>

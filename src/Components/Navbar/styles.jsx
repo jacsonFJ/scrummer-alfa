@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { styled } from "styled-components";
 import Colors from "../../Colors";
 
@@ -17,9 +19,13 @@ export const NavbarContainer = styled.div`
   max-width: 1300px;
 `;
 
-export const LogoImage = styled.img`
-  width: 32px;
-  height: 32px;
+export const LogoImage = styled(Link)`
+  text-decoration: none;
+  display: inline-flex;
+  img {
+    width: 32px;
+    height: 32px;
+  }
 `;
 
 export const RightGroup = styled.div`

@@ -14,7 +14,3 @@ export const Input = styled.input`
     outline: 1px solid ${Colors.secondary700};
   }
 `;
-
-export default function InputText() {
-  return <Input type="text" />;
-}

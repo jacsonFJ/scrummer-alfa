@@ -29,11 +29,11 @@ export default function SprintDetail() {
               </div>
               <ButtonPlus />
             </CardListTitle>
-            <ItemBacklogSmall to='/projetos/item' />
-            <ItemBacklogSmall to='/projetos/item' />
-            <ItemBacklogSmall to='/projetos/item' />
-            <ItemBacklogSmall to='/projetos/item' />
-            <ItemBacklogSmall to='/projetos/item' />
+            <ItemBacklogSmall to='/projetos/teste/item' />
+            <ItemBacklogSmall to='/projetos/teste/item' />
+            <ItemBacklogSmall to='/projetos/teste/item' />
+            <ItemBacklogSmall to='/projetos/teste/item' />
+            <ItemBacklogSmall to='/projetos/teste/item' />
             <CardListBottom>
               <PaginatorSmall />
             </CardListBottom>
@@ -46,11 +46,11 @@ export default function SprintDetail() {
               </div>
               <ButtonPlus />
             </CardListTitle>
-            <ItemBacklogSmall to='/projetos/reunioes' />
-            <ItemBacklogSmall to='/projetos/reunioes' />
-            <ItemBacklogSmall to='/projetos/reunioes' />
-            <ItemBacklogSmall to='/projetos/reunioes' />
-            <ItemBacklogSmall to='/projetos/reunioes' />
+            <ItemBacklogSmall to='/projetos/teste/reunioes' />
+            <ItemBacklogSmall to='/projetos/teste/reunioes' />
+            <ItemBacklogSmall to='/projetos/teste/reunioes' />
+            <ItemBacklogSmall to='/projetos/teste/reunioes' />
+            <ItemBacklogSmall to='/projetos/teste/reunioes' />
             <CardListBottom>
               <PaginatorSmall />
             </CardListBottom>

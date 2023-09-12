@@ -7,7 +7,7 @@ import { ImgCircle } from "../Images";
 export default function ProjectCard() {
   return (
     <CardContainer>
-      <CardTitle to="/projetos/detalhes">
+      <CardTitle to="/projetos/teste/detalhes">
         Nome do projeto
       </CardTitle>
       <p>
