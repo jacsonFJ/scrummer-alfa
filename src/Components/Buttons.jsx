@@ -11,6 +11,7 @@ const ButtonText = styled.button`
   gap: 8px;
   border-radius: 8px;
   font-size: 16px;
+  cursor: pointer;
 `;
 
 export const ButtonSuccess = styled(ButtonText)`
@@ -35,6 +36,7 @@ export const ButtonIcon = styled.button`
   display: flex;
   padding: 11px;
   border-radius: 8px;
+  cursor: pointer;
 `;
 
 const ButtonTrashTemplate = styled(ButtonIcon)`
