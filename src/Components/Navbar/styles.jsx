@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 import { styled } from "styled-components";
 import Colors from "../../Colors";
+import Dropdown from "../Dropdown";
 
 export const NavbarBlock = styled.div`
   width: 100%;
@@ -32,19 +33,24 @@ export const RightGroup = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 18px;
+`;
+
+export const BtnDropdown = styled(Dropdown)`
+  display: flex;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+  background-color: transparent;
+  border: none;
   color: white;
 
-  div {
-    display: flex;
-    align-items: center;
-    .navbar-icon {
-      width: 24px;
-      height: 24px;
-      margin-right: 4px;
-    }
-    .navbar-arrow {
-      width: 8px;
-      height: 8px;
-    }
+  .navbar-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+  }
+  .navbar-arrow {
+    width: 8px;
+    height: 8px;
   }
 `;

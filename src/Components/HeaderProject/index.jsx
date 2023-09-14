@@ -2,12 +2,14 @@ import { FaRegFolderClosed } from 'react-icons/fa6';
 import { FiActivity, FiAlignJustify, FiCheckSquare, FiList } from 'react-icons/fi';
 import { TbTriangleInvertedFilled } from 'react-icons/tb';
 import { styled } from 'styled-components';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { HeaderBlock, HeaderLink, IconBlock, IconBox, LinksList } from '../Header/styles';
 import Colors from '../../Colors';
+import Dropdown from '../Dropdown';
+import { DropdownItem } from '../Dropdown/styles';
 
-const BtnDropDown = styled.button`
+const BtnDropDown = styled(Dropdown)`
   padding: 6px;
   color: ${Colors.secondary900};
   border: 1px solid ${Colors.secondary200};
@@ -27,8 +29,24 @@ export default function HeaderProject() {
             <FaRegFolderClosed size={60} />
           </IconBox>
           <h1>Nome do projeto</h1>
-          <BtnDropDown>
-            <TbTriangleInvertedFilled size={16} />
+          <BtnDropDown
+            buttonContent={<TbTriangleInvertedFilled size={16} />}
+          >
+            <DropdownItem>
+              <Link to='/projetos'>
+                Editar Projeto
+              </Link>
+            </DropdownItem>
+            <DropdownItem>
+              <Link to='/projetos/teste/usuarios'>
+                Participantes
+              </Link>
+            </DropdownItem>
+            <DropdownItem>
+              <button>
+                Arquivar Projeto
+              </button>
+            </DropdownItem>
           </BtnDropDown>
         </IconBlock>
         <LinksList>
