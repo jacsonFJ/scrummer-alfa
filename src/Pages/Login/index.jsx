@@ -1,4 +1,6 @@
 import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 import InputField from "../../Components/Forms/InputField";
 import { Input } from "../../Components/Forms/InputText";
@@ -9,8 +11,54 @@ import { ButtonSuccess } from "../../Components/Buttons";
 export default function Login() {
   const {register, handleSubmit} = useForm();
 
+  const http = axios.create({
+    baseURL: 'http://localhost',
+    headers: {
+      'X-Requested0With': 'XMLHttpRequest',
+    },
+    withCredentials: true,
+  });
+
+  const testApi = async () => {
+    console.log(await http.get('/sanctum/csrf-cookie'));
+
+    console.log(
+      await http.post('/api/login', {
+        email: 'teste',
+        password: 'teste'
+      })
+    );
+
+    const response = await http.get('/api/user');
+    console.log('===============Logado=====================');
+    console.log(response.data);
+    console.log('====================================');
+
+    console.log(
+      await http.post('/api/logout', {
+        email: 'teste',
+        password: 'teste'
+      })
+    );
+
+    try {
+      const response2 = await http.get('/api/user');
+      console.log('===============Deslogado=====================');
+      console.log(response2.data);
+      console.log('====================================');
+    } catch (error) {
+      console.log('================Deslogado====================');
+      console.log(error);
+      console.log('====================================');
+    }
+  };
+
+  useEffect(() => {
+    testApi();
+  }, []);
+
   const subtmitAction = (data) => {
-    alert(JSON.stringify(data));
+    console.log(data);
   };
 
   return (
