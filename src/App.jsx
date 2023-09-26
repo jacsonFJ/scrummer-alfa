@@ -12,6 +12,7 @@ import IncrementOnSoftware from './Pages/Project/IncrementOnSoftware';
 import BacklogItem from './Pages/Project/BacklogItem';
 import SprintDetail from './Pages/Project/SprintDetail';
 import Meeting from './Pages/Project/Meeting';
+import ForgotPassword from './Pages/ForgotPassword';
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/" element={<Navigate to={'/login'} />} />
         <Route path="/login" element={<Login />} />
         <Route path='/cadastrese' element={<Signup />} />
+        <Route path='/esqueci-minha-senha' element={<ForgotPassword />} />
         <Route path="/projetos" element={<ProjectsList />} />
         <Route path="/projetos-arquivados" element={<ProjectsList />} />
         <Route path="/meus-projetos" element={<ProjectsList />} />
