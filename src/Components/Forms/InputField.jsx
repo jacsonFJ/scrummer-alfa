@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 import Colors from "../../Colors";
 
 const Field = styled.div`
@@ -8,6 +8,22 @@ const Field = styled.div`
   gap: 8px;
   align-self: stretch;
   width: 100%;
+
+  .input-error {
+    color: ${Colors.danger400};
+    font-size: 12px;
+    font-weight: 500;
+    display: none;
+  }
+
+  ${props => props.error && css`
+    input {
+      outline: 1px solid ${Colors.danger400};
+    }
+    .input-error {
+      display: inline-flex;
+    }
+  `}
 `;
 
 const Title = styled.label`
@@ -17,9 +33,10 @@ const Title = styled.label`
 
 export default function InputField(props) {
   return (
-    <Field>
+    <Field error={props.error}>
       <Title>{props.title}</Title>
       {props.children}
+      <label class="input-error">{props.error}</label>
     </Field>
   );
 }

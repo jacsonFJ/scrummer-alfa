@@ -9,7 +9,12 @@ import http from "../../helpers/http";
 
 
 export default function Signup() {
-  const {register, handleSubmit} = useForm();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
 
   const subtmitAction = async (data) => {
@@ -18,8 +23,15 @@ export default function Signup() {
     http.post('/api/signup', data)
       .then(() => navigate('/projetos'))
       .catch(error => {
-        console.error(error);
-        alert(error.response?.data?.message ?? 'Erro desconhecido!');
+
+        if (error.response?.data?.message === 'Dados inválidos!') {
+          error.response.data.errors.forEach(
+            (errorItem) => setError(errorItem.field, { type: 'server', message: errorItem.error })
+          );
+        } else {
+          alert('Erro desconhecido!');
+        }
+
       });
   };
 
@@ -27,16 +39,16 @@ export default function Signup() {
     <>
       <LoginHeader title="Cadastre-se no Scrummer" />
       <Form onSubmit={handleSubmit(subtmitAction)}>
-        <InputField title="Nome">
+        <InputField title="Nome" error={errors.name?.message}>
           <Input {...register('name')} />
         </InputField>
-        <InputField title="E-mail">
+        <InputField title="E-mail" error={errors.email?.message}>
           <Input {...register('email')} />
         </InputField>
-        <InputField title="Senha">
+        <InputField title="Senha" error={errors.password?.message}>
           <Input type="password" {...register('password')} />
         </InputField>
-        <InputField title="Confirmar senha">
+        <InputField title="Confirmar senha" error={errors.confirm_password?.message}>
           <Input type="password" {...register('confirm_password')} />
         </InputField>
         <ButtonSuccess width="100%">

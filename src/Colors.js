@@ -12,6 +12,7 @@ const Colors = {
   neutral500: '#0091EA',
   danger50: '#F8E8E8',
   danger200: '#DE9797',
+  danger400: '#C54949',
   danger500: '#B71C1C',
   danger700: '#821414',
 }
