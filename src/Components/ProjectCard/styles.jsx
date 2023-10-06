@@ -41,9 +41,5 @@ export const CardFooter = styled.div`
     color: ${Colors.secondary900};
     font-size: 16px;
     font-weight: 400;
-    svg {
-      width: 24px;
-      height: 24px;
-    }
   }
 `;

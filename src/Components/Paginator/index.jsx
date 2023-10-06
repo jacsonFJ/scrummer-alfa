@@ -1,7 +1,10 @@
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { ButtonNumberPaginator, ButtonTextPaginator, PaginatorLine } from "./styles";
 
-export default function Paginator() {
+export default function Paginator({ pagination }) {
+  console.log('====================================');
+  console.log(pagination);
+  console.log('====================================');
   return (
     <PaginatorLine>
       <ButtonTextPaginator to="/projetos">
