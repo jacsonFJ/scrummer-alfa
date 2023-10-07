@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import { Link } from "react-router-dom";
 
 import Colors from "../../Colors";
 
@@ -10,7 +9,7 @@ export const PaginatorLine = styled.div`
   margin: 40px 0px;
 `;
 
-export const ButtonTextPaginator = styled(Link)`
+export const ButtonTextPaginator = styled.button`
   display: flex;
   padding: 8px 10px;
   justify-content: center;
@@ -19,14 +18,17 @@ export const ButtonTextPaginator = styled(Link)`
   color: ${Colors.neutral500};
   font-size: 12px;
   text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
 
-  svg {
-    width: 16px;
-    height: 16px;
+  &:disabled {
+    color: ${Colors.secondary700};
+    cursor: auto;
   }
 `;
 
-export const ButtonNumberPaginator = styled(Link)`
+export const ButtonNumberPaginator = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,4 +40,5 @@ export const ButtonNumberPaginator = styled(Link)`
   color: ${props => props.checked ? '#fff' : Colors.secondary900 };
   text-decoration: none;
   font-size: 12px;
+  cursor: pointer;
 `;

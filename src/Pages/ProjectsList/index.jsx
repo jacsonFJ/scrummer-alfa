@@ -10,11 +10,15 @@ import http from '../../helpers/http';
 export default function ProjectsList() {
   const [projects, setProjects] = useState([]);
   const [pagination, setPagination] = useState({});
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     http
       .get('/api/projects/in-progress', {
-        params: {per_page: 5}
+        params: {
+          per_page: 5,
+          page
+        }
       })
       .then(response => {
         setProjects(response.data.data);
@@ -24,7 +28,7 @@ export default function ProjectsList() {
         console.error('Erro na lista de projetos');
         console.error(error);
       });
-  }, []);
+  }, [page]);
 
   return (
     <>
@@ -37,7 +41,9 @@ export default function ProjectsList() {
           </ProjectCardMargin>
         ))}
       </ProjectCardList>
-      {pagination.current_page && <Paginator pagination={pagination} />}
+      {pagination.current_page && (
+        <Paginator pagination={pagination} page={page} setPage={setPage} />
+      )}
     </>
   );
 }
