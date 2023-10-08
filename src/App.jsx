@@ -3,7 +3,6 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Signup from './Pages/Signup';
 import './styles.css';
 import Login from './Pages/Login';
-import ProjectsList from './Pages/ProjectsList';
 import ProjectDetail from './Pages/Project/ProjectDetail';
 import ProjectUsers from './Pages/Project/ProjectUsers';
 import ProductBacklog from './Pages/Project/ProductBacklog';
@@ -13,6 +12,9 @@ import BacklogItem from './Pages/Project/BacklogItem';
 import SprintDetail from './Pages/Project/SprintDetail';
 import Meeting from './Pages/Project/Meeting';
 import ForgotPassword from './Pages/ForgotPassword';
+import ProjectListInProgress from './Pages/ProjectsList/ProjectListInProgress';
+import ProjectListArchived from './Pages/ProjectsList/ProjectListArchived';
+import ProjectListMine from './Pages/ProjectsList/ProjectListMine';
 
 export default function App() {
   return (
@@ -22,9 +24,9 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path='/cadastrese' element={<Signup />} />
         <Route path='/esqueci-minha-senha' element={<ForgotPassword />} />
-        <Route path="/projetos" element={<ProjectsList />} />
-        <Route path="/projetos-arquivados" element={<ProjectsList />} />
-        <Route path="/meus-projetos" element={<ProjectsList />} />
+        <Route path="/projetos" element={<ProjectListInProgress />} />
+        <Route path="/projetos-arquivados" element={<ProjectListArchived />} />
+        <Route path="/meus-projetos" element={<ProjectListMine />} />
         <Route path="/projetos/:id/detalhes" element={<ProjectDetail />} />
         <Route path='/projetos/:id/usuarios' element={<ProjectUsers />} />
         <Route path='/projetos/:id/product-backlog' element={<ProductBacklog />} />
