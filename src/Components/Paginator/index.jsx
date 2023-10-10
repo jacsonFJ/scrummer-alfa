@@ -40,7 +40,11 @@ export default function Paginator({ pagination, page, setPage }) {
         Anterior
       </ButtonTextPaginator>
       {buttons.map(buttonPage => (
-        <ButtonNumberPaginator onClick={() => setPage(buttonPage)} checked={buttonPage === page}>
+        <ButtonNumberPaginator
+          onClick={() => setPage(buttonPage)}
+          checked={buttonPage === page}
+          key={buttonPage}
+        >
           {buttonPage}
         </ButtonNumberPaginator>
       ))}

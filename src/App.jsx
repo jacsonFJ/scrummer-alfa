@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import ReactModal from 'react-modal';
 
 import Signup from './Pages/Signup';
 import './styles.css';
@@ -15,6 +16,8 @@ import ForgotPassword from './Pages/ForgotPassword';
 import ProjectListInProgress from './Pages/ProjectsList/ProjectListInProgress';
 import ProjectListArchived from './Pages/ProjectsList/ProjectListArchived';
 import ProjectListMine from './Pages/ProjectsList/ProjectListMine';
+
+ReactModal.setAppElement('#root');
 
 export default function App() {
   return (

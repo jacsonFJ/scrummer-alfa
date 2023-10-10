@@ -26,7 +26,7 @@ export default function ProductBacklog() {
           <ItemBacklogLarge />
         </BacklogList>
       </BacklogContainer>
-      <Paginator />
+      {/* <Paginator /> */}
     </>
   );
 }
