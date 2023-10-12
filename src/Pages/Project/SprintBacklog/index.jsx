@@ -10,10 +10,10 @@ import Paginator from '../../../Components/Paginator/index';
 import { ButtonDanger, ButtonSuccess } from "../../../Components/Buttons";
 import ItemsFilter from '../../../Components/ItemsFilter/index';
 import { ItemBacklogLarge } from '../../../Components/ListItems/index';
-import { ModalHeader, NoSprint, TitleRow, modalStyles } from "./styles";
+import { NoSprint, TitleRow } from "./styles";
 import InputField from '../../../Components/Forms/InputField';
 import { Input } from '../../../Components/Forms/InputText';
-import Colors from "../../../Colors";
+import { ModalHeader, ModalSeparator, modalStyles } from "../../../Components/ModalComponents";
 
 export default function SprintBacklog() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -82,16 +82,7 @@ export default function SprintBacklog() {
         <InputField title='Iniciado em'>
           <Input placeholder="dd/mm/aaaa" style={{width: '300px'}} />
         </InputField>
-        <hr
-          style={{
-            width: '100%',
-            height: '1px',
-            marginTop: '20px',
-            marginBottom: '0px',
-            backgroundColor: Colors.secondary200,
-            border: 'none',
-          }}
-        />
+        <ModalSeparator />
         <div style={{display: 'flex', justifyContent: 'flex-end'}}>
           <ButtonSuccess>
             Salvar

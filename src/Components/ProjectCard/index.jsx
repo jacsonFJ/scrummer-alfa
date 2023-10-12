@@ -10,9 +10,7 @@ export default function ProjectCard({ project }) {
       <CardTitle to="/projetos/teste/detalhes">
         {project.title}
       </CardTitle>
-      <p>
-        {project.description}
-      </p>
+      <p dangerouslySetInnerHTML={{__html: project.description}} />
       <CardFooter>
         <TagBlue>{project.role}</TagBlue>
         <div className="users-list">

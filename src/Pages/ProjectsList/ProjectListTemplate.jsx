@@ -1,24 +1,45 @@
 import { useState } from "react";
 import ReactModal from "react-modal";
+import { useForm } from "react-hook-form";
 
 import { ButtonSuccess } from "../../Components/Buttons";
 import { Header } from "../../Components/Header";
 import Navbar from "../../Components/Navbar";
 import Paginator from "../../Components/Paginator";
 import ProjectCard from "../../Components/ProjectCard";
-import { ModalHeader, modalStyles } from "../Project/SprintBacklog/styles";
 import { LineButton, ProjectCardList, ProjectCardMargin } from "./styles";
 import { FiX } from "react-icons/fi";
 import InputField from "../../Components/Forms/InputField";
 import { Input } from "../../Components/Forms/InputText";
-import Colors from "../../Colors";
-import InputTextArea from '../../Components/Forms/InputTextArea';
+import { ModalForm, ModalHeader, ModalSeparator, modalStyles } from "../../Components/ModalComponents";
+import http from '../../helpers/http';
 
 export default function ProjectsListTemplate(props) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
+
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
+
+  const subtmitAction = (data) => {
+    http.post('/api/projects', data)
+      .then(() => closeModal())
+      .catch(error => {
+        if (error.response?.data?.message === 'Dados inválidos!') {
+          error.response.data.errors.forEach(
+            (errorItem) => setError(errorItem.field, { type: 'server', message: errorItem.error })
+          );
+        } else {
+          alert('Erro desconhecido!');
+        }
+      });
+  };
 
   return (
     <>
@@ -45,33 +66,31 @@ export default function ProjectsListTemplate(props) {
         contentLabel="Adicionar Novo Projeto"
         style={modalStyles}
       >
-        <ModalHeader>
-          <h2>Adicionar Novo Projeto</h2>
-          <button onClick={closeModal}>
-            <FiX size={24} />
-          </button>
-        </ModalHeader>
-        <InputField title='Título'>
-          <Input placeholder="Título do Projeto" />
-        </InputField>
-        <InputField title='Descrição'>
-          <InputTextArea placeholder="Descrição do projeto" style={{minHeight: '73px'}} />
-        </InputField>
-        <hr
-          style={{
-            width: '100%',
-            height: '1px',
-            marginTop: '20px',
-            marginBottom: '0px',
-            backgroundColor: Colors.secondary200,
-            border: 'none',
-          }}
-        />
-        <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-          <ButtonSuccess>
-            Salvar
-          </ButtonSuccess>
-        </div>
+        <ModalForm onSubmit={handleSubmit(subtmitAction)}>
+          <ModalHeader>
+            <h2>Adicionar Novo Projeto</h2>
+            <button onClick={closeModal}>
+              <FiX size={24} />
+            </button>
+          </ModalHeader>
+          <InputField title='Título' error={errors.title?.message}>
+            <Input placeholder="Título do Projeto" {...register('title')} />
+          </InputField>
+          <InputField title='Descrição'>
+            <Input
+              as="textarea"
+              placeholder="Descrição do projeto"
+              {...register('description')}
+              style={{minHeight: '73px'}}
+            />
+          </InputField>
+          <ModalSeparator />
+          <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+            <ButtonSuccess type="submit">
+              Salvar
+            </ButtonSuccess>
+          </div>
+        </ModalForm>
       </ReactModal>
     </>
   );

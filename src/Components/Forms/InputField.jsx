@@ -36,7 +36,7 @@ export default function InputField(props) {
     <Field error={props.error}>
       <Title>{props.title}</Title>
       {props.children}
-      <label class="input-error">{props.error}</label>
+      <label className="input-error">{props.error}</label>
     </Field>
   );
 }
