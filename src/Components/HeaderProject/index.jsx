@@ -16,9 +16,10 @@ const BtnDropDown = styled(Dropdown)`
   border-radius: 8px;
   background-color: transparent;
   display: flex;
+  cursor: pointer;
 `;
 
-export default function HeaderProject() {
+export default function HeaderProject({ project }) {
   const location = useLocation();
 
   return (
@@ -28,7 +29,7 @@ export default function HeaderProject() {
           <IconBox>
             <FaRegFolderClosed size={60} />
           </IconBox>
-          <h1>Nome do projeto</h1>
+          <h1>{project.title}</h1>
           <BtnDropDown
             buttonContent={<TbTriangleInvertedFilled size={16} />}
           >
@@ -38,7 +39,7 @@ export default function HeaderProject() {
               </Link>
             </DropdownItem>
             <DropdownItem>
-              <Link to='/projetos/teste/usuarios'>
+              <Link to={`/projetos/${project.id}/usuarios`}>
                 Participantes
               </Link>
             </DropdownItem>
@@ -51,28 +52,28 @@ export default function HeaderProject() {
         </IconBlock>
         <LinksList>
           <HeaderLink
-            to="/projetos/teste/detalhes"
+            to={`/projetos/${project.id}/detalhes`}
             checked={location.pathname.match(/^\/projetos\/.*\/detalhes$/)}
           >
             <FiActivity />
             Visão geral
           </HeaderLink>
           <HeaderLink
-            to="/projetos/teste/product-backlog"
+            to={`/projetos/${project.id}/product-backlog`}
             checked={location.pathname.match(/^\/projetos\/.*\/product-backlog$/)}
           >
             <FiAlignJustify />
             Product Backlog
           </HeaderLink>
           <HeaderLink
-            to="/projetos/teste/sprint-backlog"
+            to={`/projetos/${project.id}/sprint-backlog`}
             checked={location.pathname.match(/^\/projetos\/.*\/sprint-backlog$/)}
           >
             <FiList />
             Sprint Backlog
           </HeaderLink>
           <HeaderLink
-            to="/projetos/teste/increment-on-software"
+            to={`/projetos/${project.id}/increment-on-software`}
             checked={location.pathname.match(/^\/projetos\/.*\/increment-on-software$/)}
           >
             <FiCheckSquare />

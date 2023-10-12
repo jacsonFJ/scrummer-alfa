@@ -7,7 +7,7 @@ import { ImgCircle } from "../Images";
 export default function ProjectCard({ project }) {
   return (
     <CardContainer>
-      <CardTitle to="/projetos/teste/detalhes">
+      <CardTitle to={`/projetos/${project.id}/detalhes`}>
         {project.title}
       </CardTitle>
       <p dangerouslySetInnerHTML={{__html: project.description}} />
