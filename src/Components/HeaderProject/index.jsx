@@ -2,7 +2,7 @@ import { FaRegFolderClosed } from 'react-icons/fa6';
 import { FiActivity, FiAlignJustify, FiCheckSquare, FiList, FiX } from 'react-icons/fi';
 import { TbTriangleInvertedFilled } from 'react-icons/tb';
 import { styled } from 'styled-components';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ReactModal from 'react-modal';
 
 import { HeaderBlock, HeaderLink, IconBlock, IconBox, LinksList } from '../Header/styles';
@@ -29,9 +29,8 @@ const BtnDropDown = styled(Dropdown)`
 
 export default function HeaderProject({ project }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
   const location = useLocation();
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -56,6 +55,12 @@ export default function HeaderProject({ project }) {
       });
   };
 
+  const destroyAction = () => {
+    http.delete(`/api/projects/${project.id}`)
+      .then(() => navigate('/projetos'))
+      .catch(() => alert('Erro desconhecido!'));
+  };
+
   return (
     <HeaderBlock>
       <div id="header-container">
@@ -78,7 +83,7 @@ export default function HeaderProject({ project }) {
               </Link>
             </DropdownItem>
             <DropdownItem>
-              <button>
+              <button onClick={destroyAction}>
                 Arquivar Projeto
               </button>
             </DropdownItem>
