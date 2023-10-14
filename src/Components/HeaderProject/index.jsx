@@ -1,13 +1,21 @@
 import { FaRegFolderClosed } from 'react-icons/fa6';
-import { FiActivity, FiAlignJustify, FiCheckSquare, FiList } from 'react-icons/fi';
+import { FiActivity, FiAlignJustify, FiCheckSquare, FiList, FiX } from 'react-icons/fi';
 import { TbTriangleInvertedFilled } from 'react-icons/tb';
 import { styled } from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
+import ReactModal from 'react-modal';
 
 import { HeaderBlock, HeaderLink, IconBlock, IconBox, LinksList } from '../Header/styles';
 import Colors from '../../Colors';
 import Dropdown from '../Dropdown';
 import { DropdownItem } from '../Dropdown/styles';
+import InputField from '../Forms/InputField';
+import { Input } from '../Forms/InputText';
+import { ModalForm, ModalHeader, ModalSeparator, modalStyles } from '../ModalComponents';
+import { ButtonSuccess } from '../Buttons';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import http from '../../helpers/http';
 
 const BtnDropDown = styled(Dropdown)`
   padding: 6px;
@@ -20,7 +28,33 @@ const BtnDropDown = styled(Dropdown)`
 `;
 
 export default function HeaderProject({ project }) {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const location = useLocation();
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
+
+  const openModal = () => setModalIsOpen(true);
+  const closeModal = () => setModalIsOpen(false);
+
+  const subtmitAction = (data) => {
+    http.put(`/api/projects/${project.id}`, data)
+      .then(() => closeModal())
+      .catch(error => {
+        if (error.response?.data?.message === 'Dados inválidos!') {
+          error.response.data.errors.forEach(
+            (errorItem) => setError(errorItem.field, { type: 'server', message: errorItem.error })
+          );
+        } else {
+          alert('Erro desconhecido!');
+        }
+      });
+  };
 
   return (
     <HeaderBlock>
@@ -34,9 +68,9 @@ export default function HeaderProject({ project }) {
             buttonContent={<TbTriangleInvertedFilled size={16} />}
           >
             <DropdownItem>
-              <Link to='/projetos'>
+              <button onClick={openModal}>
                 Editar Projeto
-              </Link>
+              </button>
             </DropdownItem>
             <DropdownItem>
               <Link to={`/projetos/${project.id}/usuarios`}>
@@ -81,6 +115,42 @@ export default function HeaderProject({ project }) {
           </HeaderLink>
         </LinksList>
       </div>
+      <ReactModal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Adicionar Novo Projeto"
+        style={modalStyles}
+      >
+        <ModalForm onSubmit={handleSubmit(subtmitAction)}>
+          <ModalHeader>
+            <h2>Adicionar Novo Projeto</h2>
+            <button onClick={closeModal}>
+              <FiX size={24} />
+            </button>
+          </ModalHeader>
+          <InputField title='Título' error={errors.title?.message}>
+            <Input
+              placeholder="Título do Projeto"
+              {...register('title', {value: project.title})}
+            />
+          </InputField>
+          <InputField title='Descrição'>
+            <Input
+              as="textarea"
+              placeholder="Descrição do projeto"
+              {...register('description', {value: project.description})}
+              style={{minHeight: '73px'}}
+            >
+            </Input>
+          </InputField>
+          <ModalSeparator />
+          <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+            <ButtonSuccess type="submit">
+              Salvar
+            </ButtonSuccess>
+          </div>
+        </ModalForm>
+      </ReactModal>
     </HeaderBlock>
   );
 }
