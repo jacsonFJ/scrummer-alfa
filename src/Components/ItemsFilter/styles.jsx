@@ -78,7 +78,7 @@ export const FilterOrder = styled.div`
     }
   }
 
-  button {
+  label {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     border: none;
@@ -91,5 +91,9 @@ export const FilterOrder = styled.div`
     color: ${Colors.secondary900};
     background-color: white;
     padding: 0px;
+  }
+
+  input {
+    display: none;
   }
 `;

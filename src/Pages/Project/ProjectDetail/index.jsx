@@ -8,16 +8,14 @@ import { ImgCircle } from '../../../Components/Images';
 import { TagBlue } from '../../../Components/Tags';
 import Colors from '../../../Colors';
 import HeaderProject from '../../../Components/HeaderProject';
-import http from '../../../helpers/http';
+import { showProject } from '../../../helpers/repositories/projectRepository';
 
 export default function ProjectDetail() {
   const [project, setProject] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
-    http.get(`/api/projects/${id}`)
-      .then(response => setProject(response.data.data))
-      .catch(() => alert('Erro'));
+    showProject(id, setProject);
   }, [id]);
 
   return (
