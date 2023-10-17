@@ -10,6 +10,7 @@ import { ItemBacklogLarge } from "../../../Components/ListItems";
 import Paginator from '../../../Components/Paginator/index';
 import { showProject } from '../../../helpers/repositories/projectRepository';
 import { listProductBacklog } from "../../../helpers/repositories/itemRepository";
+import StoreItem from "../../../Components/Modals/StoreItem";
 
 export default function ProductBacklog() {
   const defaultFilterData = {
@@ -17,6 +18,7 @@ export default function ProductBacklog() {
     sort_direction: 'asc',
   };
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [project, setProject] = useState(null);
   const [items, setItems] = useState([]);
   const [pagination, setPagination] = useState({});
@@ -24,6 +26,9 @@ export default function ProductBacklog() {
   const [filterData, setFilterData] = useState(defaultFilterData);
 
   const { id } = useParams();
+
+  const openModal = () => setModalIsOpen(true);
+  const closeModal = () => setModalIsOpen(false);
 
   useEffect(() => {
     showProject(id, setProject);
@@ -42,17 +47,20 @@ export default function ProductBacklog() {
       {project && <>
         <HeaderProject project={project} />
         <BacklogContainer>
-          <ButtonSuccess>
+          <ButtonSuccess onClick={openModal}>
             Adicionar Item
           </ButtonSuccess>
           <BacklogList>
             <ItemsFilter setFilterData={setFilterData} defaultFilterData={defaultFilterData} />
-            {items.map(item => <ItemBacklogLarge key={item.id} item={item} />)}
+            {items.map(item => (
+              <ItemBacklogLarge key={item.id} item={item} projectId={project.id} />
+            ))}
           </BacklogList>
         </BacklogContainer>
         {pagination.last_page && (
           <Paginator pagination={pagination} page={page} setPage={setPage} />
         )}
+        <StoreItem projectId={project.id} isOpen={modalIsOpen} closeModal={closeModal} />
       </>}
     </>
   );

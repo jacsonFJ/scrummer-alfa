@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { ImgCircle } from "../Images";
 import { BacklogInfo, ItemBlock, ItemContainer } from "./styles";
 
-export function ItemBacklogLarge({ item }) {
+export function ItemBacklogLarge({ item, projectId }) {
   return (
     <ItemContainer>
       <ItemBlock>
-        <Link className='item-title' to={`/projetos/${item.id}/item`}>
+        <Link className='item-title' to={`/projetos/${projectId}/item/${item.id}`}>
           {item.title}
         </Link>
         <span className="bottom-line">

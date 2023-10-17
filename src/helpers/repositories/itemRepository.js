@@ -15,3 +15,15 @@ export function listProductBacklog(projectId, params, callback) {
       console.error(error);
     });
 }
+
+export function showItem(id, callback) {
+  http.get(`/api/items/${id}`)
+    .then(response => callback(response.data.data))
+    .catch(() => alert('Erro!'));
+}
+
+export function deleteItem(id, callback) {
+  http.delete(`/api/items/${id}`)
+    .then(() => callback())
+    .catch(() => alert('Erro!'));
+}

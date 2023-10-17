@@ -34,6 +34,19 @@ export const ItemTitle = styled.h2`
   span {
     font-weight: 400;
   }
+
+  button {
+    display: flex;
+    color: ${Colors.secondary900};
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid ${Colors.secondary200};
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+  }
 `;
 
 export const LeftSide = styled.div`
