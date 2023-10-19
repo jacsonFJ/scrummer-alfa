@@ -27,3 +27,15 @@ export function deleteItem(id, callback) {
     .then(() => callback())
     .catch(() => alert('Erro!'));
 }
+
+export function addUserToItem(itemId, userId, callback) {
+  http.post(`/api/items/${itemId}/users`, {user_id: userId})
+    .then(() => callback())
+    .catch(() => alert('Erro!'));
+}
+
+export function removeUserFromItem(itemId, userId, callback) {
+  http.delete(`/api/items/${itemId}/users/${userId}`)
+    .then(() => callback())
+    .catch(() => alert('Erro!'));
+}

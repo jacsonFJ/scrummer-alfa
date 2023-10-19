@@ -51,17 +51,17 @@ const ButtonPlusTemplate = styled(ButtonIcon)`
   color: ${Colors.neutral500};
 `;
 
-export function ButtonTrash() {
+export function ButtonTrash(props) {
   return (
-    <ButtonTrashTemplate>
+    <ButtonTrashTemplate {...props}>
       <FiTrash2 size={16} />
     </ButtonTrashTemplate>
   );
 }
 
-export function ButtonPlus() {
+export function ButtonPlus(props) {
   return (
-    <ButtonPlusTemplate>
+    <ButtonPlusTemplate {...props}>
       <FiPlus size={16} />
     </ButtonPlusTemplate>
   );

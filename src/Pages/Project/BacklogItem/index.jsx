@@ -4,16 +4,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../../../Components/Navbar/index';
 import HeaderProject from '../../../Components/HeaderProject/index';
 import { BacklogItemContainer, CommentArea, ItemDescription, ItemTitle, LeftEvents, LeftSide, Participant, ParticipantRow, RightRow, RightSide, RightTitle, Row40, Row5, UsersList } from './styles';
-import { ButtonDanger, ButtonPlus, ButtonTrash, ButtonWhite } from '../../../Components/Buttons';
+import { ButtonDanger, ButtonTrash, ButtonWhite } from '../../../Components/Buttons';
 import { ImgCircle } from '../../../Components/Images';
 import InputSelect from '../../../Components/Forms/InputSelect';
 import HistoryEvent from '../../../Components/HistoryEvent';
 import Note from '../../../Components/Note';
 import InputTextArea from '../../../Components/Forms/InputTextArea';
 import { showProject } from '../../../helpers/repositories/projectRepository';
-import { deleteItem, showItem } from '../../../helpers/repositories/itemRepository';
+import { addUserToItem, deleteItem, removeUserFromItem, showItem } from '../../../helpers/repositories/itemRepository';
 import { FiEdit } from 'react-icons/fi';
 import StoreItem from '../../../Components/Modals/StoreItem';
+import UserSelect from '../../../Components/UserSelect';
 
 export default function BacklogItem() {
   const [project, setProject] = useState(null);
@@ -31,6 +32,14 @@ export default function BacklogItem() {
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
   const destroy = () => deleteItem(itemId, () => navigate(`/projetos/${id}/product-backlog`));
+
+  const onSelectUser = userId => {
+    addUserToItem(itemId, userId, () => showItem(itemId, setItem));
+  };
+
+  const onRemoveUser = userId => {
+    removeUserFromItem(itemId, userId, () => showItem(itemId, setItem));
+  };
 
   return (
     <>
@@ -80,7 +89,11 @@ export default function BacklogItem() {
               <RightRow>
                 <ParticipantRow>
                   <RightTitle>Participantes</RightTitle>
-                  <ButtonPlus />
+                  <UserSelect
+                    buttonType='plus'
+                    endpoint={`/api/items/${item.id}/users/to-add`}
+                    onSelectUser={onSelectUser}
+                  />
                 </ParticipantRow>
                 <UsersList>
                   {item.users.map(user => (
@@ -93,7 +106,7 @@ export default function BacklogItem() {
                           </span>
                         </div>
                       </Participant>
-                      <ButtonTrash />
+                      <ButtonTrash onClick={() => onRemoveUser(user.id)} />
                     </ParticipantRow>
                   ))}
                 </UsersList>

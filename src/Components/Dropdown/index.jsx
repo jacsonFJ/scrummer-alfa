@@ -1,10 +1,9 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 import { DropdownContainer, DropdownList } from "./styles";
 
 export default function Dropdown(props) {
   const [active, setActive] = useState(false);
-  const containerRef = useRef();
 
   useEffect(() => {
     return closeDropdown;
@@ -19,9 +18,8 @@ export default function Dropdown(props) {
     }
   };
 
-  const onClickOut = (event) => {
-    if (containerRef.current && !containerRef.current.contains(event.target))
-      closeDropdown();
+  const onClickOut = () => {
+    setTimeout(() => closeDropdown(), 100);
   };
 
   const closeDropdown = () => {
@@ -30,7 +28,7 @@ export default function Dropdown(props) {
   };
 
   return (
-    <DropdownContainer ref={containerRef}>
+    <DropdownContainer>
       <button className={props.className} onClick={onClickButton}>
         {props.buttonContent}
       </button>
