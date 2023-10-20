@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import ReactModal from "react-modal";
-import { FiX } from "react-icons/fi";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import HeaderProject from "../../../Components/HeaderProject";
 import Navbar from "../../../Components/Navbar";
@@ -11,84 +9,76 @@ import { ButtonDanger, ButtonSuccess } from "../../../Components/Buttons";
 import ItemsFilter from '../../../Components/ItemsFilter/index';
 import { ItemBacklogLarge } from '../../../Components/ListItems/index';
 import { NoSprint, TitleRow } from "./styles";
-import InputField from '../../../Components/Forms/InputField';
-import { Input } from '../../../Components/Forms/InputText';
-import { ModalHeader, ModalSeparator, modalStyles } from "../../../Components/ModalComponents";
+import { showProject } from "../../../helpers/repositories/projectRepository";
+import { showCurrentSprint } from "../../../helpers/repositories/sprintRepository";
+import StoreSprint from "../../../Components/Modals/StoreSprint";
 
 export default function SprintBacklog() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [project, setProject] = useState(null);
+  const [sprint, setSprint] = useState(null);
 
-  function openModal() {
-    setModalIsOpen(true);
-  }
+  const { id } = useParams();
 
-  function closeModal() {
-    setModalIsOpen(false);
-  }
+  useEffect(() => {
+    showProject(id, setProject);
+    showCurrentSprint(id, setSprint)
+  }, [id]);
+
+  const openModal = () => setModalIsOpen(true);
+  const closeModal = () => setModalIsOpen(false);
+
+  const afterSprintStored = (modalResponse) => {
+    closeModal();
+    setSprint(modalResponse);
+  };
 
   return (
     <>
       <Navbar />
-      <HeaderProject />
-      {true ? (
-        <BacklogContainer>
-          <ButtonSuccess onClick={openModal}>
-            Iniciar Sprint
-          </ButtonSuccess>
-          <NoSprint>
-            Não há Sprint em andamento
-          </NoSprint>
-        </BacklogContainer>
-      ) : (
-        <>
+      {project && <>
+        <HeaderProject project={project} />
+        {sprint ? (
+          <>
+            <BacklogContainer>
+              <TitleRow>
+                <Link to="/projetos/teste/sprint">
+                  Sprint #{sprint.id} - {sprint.title}
+                </Link>
+                <ButtonDanger>
+                  Encerrar Sprint
+                </ButtonDanger>
+              </TitleRow>
+              <BacklogList>
+                <ItemsFilter />
+                {/* <ItemBacklogLarge />
+                <ItemBacklogLarge />
+                <ItemBacklogLarge />
+                <ItemBacklogLarge />
+                <ItemBacklogLarge />
+                <ItemBacklogLarge />
+                <ItemBacklogLarge /> */}
+              </BacklogList>
+            </BacklogContainer>
+            {/* <Paginator /> */}
+          </>
+        ) : (
           <BacklogContainer>
-            <TitleRow>
-              <Link to="/projetos/teste/sprint">
-                Sprint #9 - Título da sprint
-              </Link>
-              <ButtonDanger>
-                Encerrar Sprint
-              </ButtonDanger>
-            </TitleRow>
-            <BacklogList>
-              <ItemsFilter />
-              <ItemBacklogLarge />
-              <ItemBacklogLarge />
-              <ItemBacklogLarge />
-              <ItemBacklogLarge />
-              <ItemBacklogLarge />
-              <ItemBacklogLarge />
-              <ItemBacklogLarge />
-            </BacklogList>
+            <ButtonSuccess onClick={openModal}>
+              Iniciar Sprint
+            </ButtonSuccess>
+            <NoSprint>
+              Não há Sprint em andamento
+            </NoSprint>
           </BacklogContainer>
-          <Paginator />
-        </>
-      )}
-      <ReactModal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Iniciar Sprint"
-        style={modalStyles}
-      >
-        <ModalHeader>
-          <h2>Iniciar Nova Sprint</h2>
-          <button onClick={closeModal}>
-            <FiX size={24} />
-          </button>
-        </ModalHeader>
-        <InputField title='Título'>
-          <Input placeholder="Título da Sprint" />
-        </InputField>
-        <InputField title='Iniciado em'>
-          <Input placeholder="dd/mm/aaaa" style={{width: '300px'}} />
-        </InputField>
-        <ModalSeparator />
-        <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-          <ButtonSuccess>
-            Salvar
-          </ButtonSuccess>
-        </div>
-      </ReactModal>
+        )}
+        <StoreSprint
+          isOpen={modalIsOpen}
+          closeModal={closeModal}
+          projectId={project.id}
+          onSuccess={afterSprintStored}
+        />
+      </>}
     </>
   );
 }
