@@ -18,7 +18,9 @@ export function ItemBacklogLarge({ item, projectId }) {
       <ItemBlock right>
         <BacklogInfo>
           <div className="users-list">
-            {item.users.map(user => <ImgCircle size="16px" src={user.picture_url} />)}
+            {item.users.map(user => (
+              <ImgCircle key={user.id} size="16px" src={user.picture_url} />
+            ))}
           </div>
           <div className="item-notes">
             <FiMessageSquare size={16} />

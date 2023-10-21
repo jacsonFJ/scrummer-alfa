@@ -16,6 +16,19 @@ export function listProductBacklog(projectId, params, callback) {
     });
 }
 
+export function listSprintBacklog(sprintId, params, callback) {
+  http
+    .get('/api/items/sprint-backlog', {
+      params: {
+        per_page: 10,
+        sprint_id: sprintId,
+        ...params
+      }
+    })
+    .then(response => callback(response.data))
+    .catch(error => console.error(error));
+}
+
 export function showItem(id, callback) {
   http.get(`/api/items/${id}`)
     .then(response => callback(response.data.data))

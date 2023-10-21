@@ -12,11 +12,22 @@ import { NoSprint, TitleRow } from "./styles";
 import { showProject } from "../../../helpers/repositories/projectRepository";
 import { showCurrentSprint } from "../../../helpers/repositories/sprintRepository";
 import StoreSprint from "../../../Components/Modals/StoreSprint";
+import { listSprintBacklog } from "../../../helpers/repositories/itemRepository";
 
 export default function SprintBacklog() {
+
+  const defaultFilterData = {
+    sort_field: 'created_at',
+    sort_direction: 'asc',
+  };
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [project, setProject] = useState(null);
   const [sprint, setSprint] = useState(null);
+  const [items, setItems] = useState([]);
+  const [filterData, setFilterData] = useState(defaultFilterData);
+  const [pagination, setPagination] = useState({});
+  const [page, setPage] = useState(1);
 
   const { id } = useParams();
 
@@ -24,6 +35,15 @@ export default function SprintBacklog() {
     showProject(id, setProject);
     showCurrentSprint(id, setSprint)
   }, [id]);
+
+  useEffect(() => {
+    if (sprint?.id) {
+      listSprintBacklog(sprint.id, {page, ...filterData}, response => {
+        setItems(response.data);
+        setPagination(response.meta);
+      });
+    }
+  }, [sprint, page, filterData]);
 
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
@@ -50,17 +70,15 @@ export default function SprintBacklog() {
                 </ButtonDanger>
               </TitleRow>
               <BacklogList>
-                <ItemsFilter />
-                {/* <ItemBacklogLarge />
-                <ItemBacklogLarge />
-                <ItemBacklogLarge />
-                <ItemBacklogLarge />
-                <ItemBacklogLarge />
-                <ItemBacklogLarge />
-                <ItemBacklogLarge /> */}
+                <ItemsFilter setFilterData={setFilterData} defaultFilterData={defaultFilterData} />
+                {items.map(item => (
+                  <ItemBacklogLarge key={item.id} item={item} projectId={project.id} />
+                ))}
               </BacklogList>
             </BacklogContainer>
-            {/* <Paginator /> */}
+            {pagination.last_page && (
+              <Paginator pagination={pagination} page={page} setPage={setPage} />
+            )}
           </>
         ) : (
           <BacklogContainer>
