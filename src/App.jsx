@@ -1,5 +1,8 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import ReactModal from 'react-modal';
+import { registerLocale, setDefaultLocale } from  "react-datepicker";
+import ptbr from 'date-fns/locale/pt-BR';
+import "react-datepicker/dist/react-datepicker.css";
 
 import Signup from './Pages/Signup';
 import './styles.css';
@@ -18,6 +21,8 @@ import ProjectListArchived from './Pages/ProjectsList/ProjectListArchived';
 import ProjectListMine from './Pages/ProjectsList/ProjectListMine';
 
 ReactModal.setAppElement('#root');
+registerLocale('pt-BR', ptbr);
+setDefaultLocale('pt-BR');
 
 export default function App() {
   return (

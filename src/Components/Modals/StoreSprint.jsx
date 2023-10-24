@@ -1,16 +1,19 @@
 import ReactModal from 'react-modal';
 import { FiX } from 'react-icons/fi';
+import { useForm } from 'react-hook-form';
 
 import { ModalForm, ModalHeader, ModalSeparator, modalStyles } from "../ModalComponents";
 import InputField from '../Forms/InputField';
 import { Input } from '../Forms/InputText';
 import { ButtonSuccess } from '../Buttons';
-import { useForm } from 'react-hook-form';
 import http from '../../helpers/http';
+import InputDate from '../Forms/InputDate';
+import { format } from 'date-fns';
 
 export default function StoreSprint(props) {
 
   const {
+    control,
     register,
     handleSubmit,
     setError,
@@ -18,7 +21,11 @@ export default function StoreSprint(props) {
   } = useForm();
 
   const subtmitAction = (data) => {
-    http.post(`/api/projects/${props.projectId}/sprints`, data)
+    const parsed = data;
+    if (parsed.start_at instanceof Date)
+      parsed.start_at = format(parsed.start_at, 'dd/MM/yyyy');
+
+    http.post(`/api/projects/${props.projectId}/sprints`, parsed)
       .then(response => props.onSuccess(response.data.data))
       .catch(error => {
         const message = error.response?.data?.message;
@@ -52,7 +59,7 @@ export default function StoreSprint(props) {
           <Input placeholder="Título da Sprint" {...register('title')} />
         </InputField>
         <InputField title='Iniciado em' error={errors.start_at?.message}>
-          <Input placeholder="dd/mm/aaaa" style={{width: '300px'}} {...register('start_at')} />
+          <InputDate control={control} name='start_at' />
         </InputField>
         <ModalSeparator />
         <div style={{display: 'flex', justifyContent: 'flex-end'}}>
