@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import Colors from "../../Colors";
 import Chevron from '../../assets/chevron-down.png';
 
-const Input = styled.select`
+const InputSelect = styled.select`
   padding: 8px 16px;
   border-radius: 8px;
   border: 1px solid ${Colors.secondary200};
@@ -20,7 +20,8 @@ const Input = styled.select`
     outline: 1px solid ${Colors.secondary700};
   }
 `;
+export default InputSelect;
 
-export default function InputSelect({children}) {
-  return <Input>{children}</Input>;
-}
+// export default function InputSelect({ children, defaultValue }) {
+//   return <Input defaultValue={defaultValue}>{children}</Input>;
+// }

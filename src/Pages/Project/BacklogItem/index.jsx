@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { FiEdit } from 'react-icons/fi';
 
 import Navbar from '../../../Components/Navbar/index';
 import HeaderProject from '../../../Components/HeaderProject/index';
@@ -11,8 +12,7 @@ import HistoryEvent from '../../../Components/HistoryEvent';
 import Note from '../../../Components/Note';
 import InputTextArea from '../../../Components/Forms/InputTextArea';
 import { showProject } from '../../../helpers/repositories/projectRepository';
-import { addUserToItem, deleteItem, removeUserFromItem, showItem } from '../../../helpers/repositories/itemRepository';
-import { FiEdit } from 'react-icons/fi';
+import { addUserToItem, changeItemStage, deleteItem, removeUserFromItem, showItem } from '../../../helpers/repositories/itemRepository';
 import StoreItem from '../../../Components/Modals/StoreItem';
 import UserSelect from '../../../Components/UserSelect';
 
@@ -39,6 +39,10 @@ export default function BacklogItem() {
 
   const onRemoveUser = userId => {
     removeUserFromItem(itemId, userId, () => showItem(itemId, setItem));
+  };
+
+  const onStageChange = event => {
+    changeItemStage(itemId, event.target.value, () => showItem(itemId, setItem));
   };
 
   return (
@@ -113,10 +117,10 @@ export default function BacklogItem() {
               </RightRow>
               <RightRow>
                 <RightTitle>Etapa</RightTitle>
-                <InputSelect>
-                  <option value="product-owner">Product Owner</option>
-                  <option value="scrum-master">Scrum Master</option>
-                  <option value="developer">Developer</option>
+                <InputSelect defaultValue={item.stage_id} onChange={onStageChange}>
+                  <option value="1">Product Backlog</option>
+                  <option value="2">Sprint Backlog</option>
+                  <option value="3">Working Increment of the Software</option>
                 </InputSelect>
               </RightRow>
             </RightSide>

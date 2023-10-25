@@ -52,3 +52,9 @@ export function removeUserFromItem(itemId, userId, callback) {
     .then(() => callback())
     .catch(() => alert('Erro!'));
 }
+
+export function changeItemStage(itemId, stageId, callback) {
+  http.patch(`/api/items/${itemId}/stages`, {stage_id: stageId})
+    .then(() => callback())
+    .catch(() => alert('Erro!'));
+}
