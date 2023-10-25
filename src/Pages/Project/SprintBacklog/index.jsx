@@ -10,7 +10,7 @@ import ItemsFilter from '../../../Components/ItemsFilter/index';
 import { ItemBacklogLarge } from '../../../Components/ListItems/index';
 import { NoSprint, TitleRow } from "./styles";
 import { showProject } from "../../../helpers/repositories/projectRepository";
-import { showCurrentSprint } from "../../../helpers/repositories/sprintRepository";
+import { closeSprint, showCurrentSprint } from "../../../helpers/repositories/sprintRepository";
 import StoreSprint from "../../../Components/Modals/StoreSprint";
 import { listSprintBacklog } from "../../../helpers/repositories/itemRepository";
 
@@ -53,6 +53,8 @@ export default function SprintBacklog() {
     setSprint(modalResponse);
   };
 
+  const closeSprintAction = () => closeSprint(id, () => setSprint(null));
+
   return (
     <>
       <Navbar />
@@ -65,7 +67,7 @@ export default function SprintBacklog() {
                 <Link to="/projetos/teste/sprint">
                   Sprint #{sprint.id} - {sprint.title}
                 </Link>
-                <ButtonDanger>
+                <ButtonDanger onClick={closeSprintAction}>
                   Encerrar Sprint
                 </ButtonDanger>
               </TitleRow>

@@ -5,3 +5,9 @@ export function showCurrentSprint(projectId, callback) {
     .then(response => callback(response.data.data))
     .catch(() => alert('Erro!'));
 }
+
+export function closeSprint(projectId, callback) {
+  http.post(`/api/projects/${projectId}/sprints/close`)
+    .then(() => callback())
+    .catch(() => alert('Erro!'));
+}
