@@ -11,3 +11,9 @@ export function closeSprint(projectId, callback) {
     .then(() => callback())
     .catch(() => alert('Erro!'));
 }
+
+export function listIncrements(projectId, params, callback) {
+  http.get(`/api/projects/${projectId}/sprints/closeds`, {params})
+    .then(response => callback(response.data))
+    .catch(() => alert('Erro!'));
+}

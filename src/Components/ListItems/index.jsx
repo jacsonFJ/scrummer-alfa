@@ -50,20 +50,22 @@ export function ItemBacklogSmall({to}) {
   );
 }
 
-export function ItemIncrement() {
+export function ItemIncrement({ sprint, projectId }) {
   return (
     <ItemContainer>
       <ItemBlock>
-        <Link className='item-title' to='/projetos/teste/item'>Este é o título do item do backlog</Link>
+        <Link className='item-title' to={`/projetos/${projectId}/sprint/${sprint.id}`}>
+          {sprint.title}
+        </Link>
         <span className="bottom-line">
-          #223 - Criado em 22/07/2023 Por Jacon Feuser Joaquim
+          #{sprint.id} - Incrementado em {sprint.end_at}
         </span>
       </ItemBlock>
       <ItemBlock right>
         <BacklogInfo>
           <div className="item-notes">
             <FiAlignJustify size={16} />
-            6
+            {sprint.items_count}
           </div>
         </BacklogInfo>
       </ItemBlock>
