@@ -64,7 +64,7 @@ export default function SprintBacklog() {
           <>
             <BacklogContainer>
               <TitleRow>
-                <Link to="/projetos/teste/sprint">
+                <Link to={`/projetos/${id}/sprint/${sprint.id}`}>
                   Sprint #{sprint.id} - {sprint.title}
                 </Link>
                 <ButtonDanger onClick={closeSprintAction}>

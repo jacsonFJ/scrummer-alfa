@@ -35,15 +35,15 @@ export function ItemBacklogLarge({ item, projectId }) {
   );
 }
 
-export function ItemBacklogSmall({to}) {
+export function ItemBacklogSmall({ item, projectId }) {
   return (
     <ItemContainer style={{width: '445px'}}>
       <ItemBlock>
-        <Link className='item-title' to={to}>
-          Este é o título do item do backlog
+        <Link className='item-title' to={`/projetos/${projectId}/item/${item.id}`}>
+          {item.title}
         </Link>
         <span className="bottom-line">
-          #223 - Criado em 22/07/2023 Por Jacon Feuser Joaquim
+          #{item.id} - Criado em {item.created_at}
         </span>
       </ItemBlock>
     </ItemContainer>

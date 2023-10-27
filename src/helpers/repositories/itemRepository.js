@@ -20,7 +20,18 @@ export function listSprintBacklog(sprintId, params, callback) {
   http
     .get('/api/items/sprint-backlog', {
       params: {
-        per_page: 10,
+        sprint_id: sprintId,
+        ...params
+      }
+    })
+    .then(response => callback(response.data))
+    .catch(error => console.error(error));
+}
+
+export function listSprint(sprintId, params, callback) {
+  http
+    .get('/api/items/sprint', {
+      params: {
         sprint_id: sprintId,
         ...params
       }
