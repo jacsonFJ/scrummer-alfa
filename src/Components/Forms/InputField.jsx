@@ -7,7 +7,7 @@ const Field = styled.div`
   align-items: flex-start;
   gap: 8px;
   align-self: stretch;
-  width: 100%;
+  position: relative;
 
   .input-error {
     color: ${Colors.danger400};

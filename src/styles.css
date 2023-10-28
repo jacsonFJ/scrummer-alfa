@@ -31,3 +31,7 @@ body {
 .react-datepicker__input-container>input:focus-visible {
   outline: 1px solid #66747C;
 }
+
+.react-datepicker-popper {
+  width: 327.07px;
+}

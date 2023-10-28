@@ -48,6 +48,11 @@ export const ModalForm = styled.form`
   flex-direction: column;
   gap: 20px;
   width: 100%;
+
+  .form-row {
+    display: flex;
+    gap: 16px;
+  }
 `;
 
 export const ModalSeparator = styled.hr`

@@ -13,6 +13,7 @@ import { showProject } from "../../../helpers/repositories/projectRepository";
 import { showSprint } from "../../../helpers/repositories/sprintRepository";
 import { listSprint } from "../../../helpers/repositories/itemRepository";
 import { listSprintMeetings } from "../../../helpers/repositories/meetingRepository";
+import StoreMeeting from "../../../Components/Modals/StoreMeeting";
 
 export default function SprintDetail() {
 
@@ -24,8 +25,12 @@ export default function SprintDetail() {
   const [meetings, setMeetings] = useState([]);
   const [meetingsPagination, setMeetingsPagination] = useState({});
   const [meetingsPage, setMeetingsPage] = useState(1);
+  const [meetingModalIsOpen, setMeetingModalIsOpen] = useState(false);
   
   const { id, sprintId } = useParams();
+
+  const openMeetingModal = () => setMeetingModalIsOpen(true);
+  const closeMeetingModal = () => setMeetingModalIsOpen(false);
 
   const listItems = () => {
     listSprint(
@@ -53,6 +58,11 @@ export default function SprintDetail() {
         setMeetingsPagination(response.meta);
       }
     );
+  };
+
+  const onMeetingSuccess = () => {
+    closeMeetingModal();
+    listMeetings();
   };
 
   useEffect(() => {
@@ -113,7 +123,7 @@ export default function SprintDetail() {
                       <FiCalendar size={24} />
                       <h3>Reuniões</h3>
                     </div>
-                    <ButtonPlus />
+                    <ButtonPlus onClick={openMeetingModal} />
                   </CardListTitle>
                   {meetings.map((meeting) => (
                     <ItemMeeting meeting={meeting} projectId={id} />
@@ -129,6 +139,12 @@ export default function SprintDetail() {
                   </CardListBottom>
                 </CardList>
               </CardsRow>
+              <StoreMeeting
+                isOpen={meetingModalIsOpen}
+                closeModal={closeMeetingModal}
+                sprint={sprint}
+                onSuccess={onMeetingSuccess}
+              />
             </BacklogItemContainer>
           )}
         </>
