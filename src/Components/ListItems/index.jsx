@@ -72,3 +72,23 @@ export function ItemIncrement({ sprint, projectId }) {
     </ItemContainer>
   );
 }
+
+export function ItemMeeting({ meeting, projectId }) {
+  return (
+    <ItemContainer style={{width: '445px'}}>
+      <ItemBlock>
+        <Link className='item-title' to={`/projetos/${projectId}/item/${meeting.id}`}>
+          {meeting.title}
+        </Link>
+        <span className="bottom-line">
+          {meeting.date}
+        </span>
+      </ItemBlock>
+      <ItemBlock right>
+        <span className="bottom-line">
+          {meeting.period}
+        </span>
+      </ItemBlock>
+    </ItemContainer>
+  );
+}

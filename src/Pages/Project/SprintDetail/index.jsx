@@ -7,11 +7,12 @@ import HeaderProject from "../../../Components/HeaderProject";
 import Navbar from "../../../Components/Navbar";
 import { BacklogItemContainer, ItemTitle, Row40, Row5 } from "../BacklogItem/styles";
 import { CardList, CardListBottom, CardListTitle, CardsRow } from "./styles";
-import { ItemBacklogSmall } from "../../../Components/ListItems";
+import { ItemBacklogSmall, ItemMeeting } from "../../../Components/ListItems";
 import PaginatorSmall from "../../../Components/PaginatorSmall";
 import { showProject } from "../../../helpers/repositories/projectRepository";
 import { showSprint } from "../../../helpers/repositories/sprintRepository";
 import { listSprint } from "../../../helpers/repositories/itemRepository";
+import { listSprintMeetings } from "../../../helpers/repositories/meetingRepository";
 
 export default function SprintDetail() {
 
@@ -20,6 +21,9 @@ export default function SprintDetail() {
   const [items, setItems] = useState([]);
   const [itemsPagination, setItemsPagination] = useState({});
   const [itemsPage, setItemsPage] = useState(1);
+  const [meetings, setMeetings] = useState([]);
+  const [meetingsPagination, setMeetingsPagination] = useState({});
+  const [meetingsPage, setMeetingsPage] = useState(1);
   
   const { id, sprintId } = useParams();
 
@@ -37,15 +41,34 @@ export default function SprintDetail() {
     );
   };
 
+  const listMeetings = () => {
+    listSprintMeetings(
+      sprintId,
+      {
+        per_page: 5,
+        page: meetingsPage,
+      },
+      response => {
+        setMeetings(response.data);
+        setMeetingsPagination(response.meta);
+      }
+    );
+  };
+
   useEffect(() => {
     showProject(id, setProject);
     showSprint(id, sprintId, setSprint);
     listItems();
+    listMeetings();
   }, [id, sprintId]);
 
   useEffect(() => {
     listItems();
   }, [itemsPage]);
+
+  useEffect(() => {
+    listMeetings();
+  }, [meetingsPage]);
 
   return (
     <>
@@ -92,13 +115,17 @@ export default function SprintDetail() {
                     </div>
                     <ButtonPlus />
                   </CardListTitle>
-                  {/* <ItemBacklogSmall to='/projetos/teste/reunioes' />
-                  <ItemBacklogSmall to='/projetos/teste/reunioes' />
-                  <ItemBacklogSmall to='/projetos/teste/reunioes' />
-                  <ItemBacklogSmall to='/projetos/teste/reunioes' />
-                  <ItemBacklogSmall to='/projetos/teste/reunioes' /> */}
+                  {meetings.map((meeting) => (
+                    <ItemMeeting meeting={meeting} projectId={id} />
+                  ))}
                   <CardListBottom>
-                    {/* <PaginatorSmall /> */}
+                    {meetingsPagination.last_page && (
+                      <PaginatorSmall
+                        pagination={meetingsPagination}
+                        page={meetingsPage}
+                        setPage={setMeetingsPage}
+                      />
+                    )}
                   </CardListBottom>
                 </CardList>
               </CardsRow>

@@ -42,7 +42,7 @@ export default function App() {
         <Route path='/projetos/:id/increment-on-software' element={<IncrementOnSoftware />} />
         <Route path='/projetos/:id/item/:itemId' element={<BacklogItem />} />
         <Route path='/projetos/:id/sprint/:sprintId' element={<SprintDetail />} />
-        <Route path='/projetos/:id/reunioes' element={<Meeting />} />
+        <Route path='/projetos/:id/reuniao/:meetingId' element={<Meeting />} />
       </Routes>
     </BrowserRouter>
   );
