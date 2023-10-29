@@ -44,3 +44,11 @@ export const DropdownItem = styled.li`
     background-color: ${Colors.secondary50};
   }
 `;
+
+export const EmptyDropdown = styled.li`
+  color: ${Colors.secondary900};
+  padding: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+`;

@@ -77,7 +77,7 @@ export function ItemMeeting({ meeting, projectId }) {
   return (
     <ItemContainer style={{width: '445px'}}>
       <ItemBlock>
-        <Link className='item-title' to={`/projetos/${projectId}/item/${meeting.id}`}>
+        <Link className='item-title' to={`/projetos/${projectId}/reuniao/${meeting.id}`}>
           {meeting.title}
         </Link>
         <span className="bottom-line">

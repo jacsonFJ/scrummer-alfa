@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { DropdownItem, DropdownList } from "./styles";
+import { DropdownItem, DropdownList, EmptyDropdown } from "./styles";
 import { ButtonPlus, ButtonSuccess } from "../Buttons";
 import { DropdownContainer } from "../Dropdown/styles";
 import http from "../../helpers/http";
@@ -54,9 +54,9 @@ export default function UserSelect({buttonType, endpoint, onSelectUser}) {
           Adicionar Participante
         </ButtonSuccess>
       )}
-      {active && users.length > 0 && (
+      {active && (
         <DropdownList>
-          {users.map(user => (
+          {users.length > 0 ? users.map(user => (
             <DropdownItem key={user.id}>
               <button onClick={() => onUserClick(user.id)}>
                 <ImgCircle size='34px' src={user.picture_url} />
@@ -65,7 +65,11 @@ export default function UserSelect({buttonType, endpoint, onSelectUser}) {
                 </span>
               </button>
             </DropdownItem>
-          ))}
+          )) : (
+            <EmptyDropdown>
+              Não há mais participantes
+            </EmptyDropdown>
+          )}
         </DropdownList>
       )}
     </DropdownContainer>
