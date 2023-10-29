@@ -43,6 +43,7 @@ export const BtnDropdown = styled(Dropdown)`
   background-color: transparent;
   border: none;
   color: white;
+  cursor: pointer;
 
   .navbar-icon {
     width: 24px;

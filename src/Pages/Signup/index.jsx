@@ -1,11 +1,14 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import InputField from "../../Components/Forms/InputField";
 import { LoginAnchor, Block, Form, LoginHeader, ScrummerBotton } from "../Login/LoginComponents";
 import { ButtonSuccess } from "../../Components/Buttons";
 import { Input } from "../../Components/Forms/InputText";
 import http from "../../helpers/http";
+import { showMe } from "../../helpers/repositories/userRepository";
+import { createUser } from "../../redux/user/slice";
 
 
 export default function Signup() {
@@ -16,23 +19,25 @@ export default function Signup() {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const subtmitAction = async (data) => {
     await http.get('/sanctum/csrf-cookie');
 
-    http.post('/api/signup', data)
-      .then(() => navigate('/projetos'))
-      .catch(error => {
-
-        if (error.response?.data?.message === 'Dados inválidos!') {
-          error.response.data.errors.forEach(
-            (errorItem) => setError(errorItem.field, { type: 'server', message: errorItem.error })
-          );
-        } else {
-          alert('Erro desconhecido!');
-        }
-
-      });
+    try {
+      await http.post('/api/signup', data);
+      const response = await showMe();
+      dispatch(createUser(response.data.data));
+      navigate('/projetos');
+    } catch (error) {
+      if (error.response?.data?.message === 'Dados inválidos!') {
+        error.response.data.errors.forEach(
+          (errorItem) => setError(errorItem.field, { type: 'server', message: errorItem.error })
+        );
+      } else {
+        alert('Erro desconhecido!');
+      }
+    }
   };
 
   return (

@@ -1,14 +1,40 @@
 import { FiBell } from "react-icons/fi";
 import { FaCircleUser } from "react-icons/fa6";
 import { TbTriangleInvertedFilled } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 import { BtnDropdown, NavbarBlock, NavbarContainer, RightGroup } from "./styles";
 import icon from '../../assets/logo-scrummer.png';
 import { LogoImage } from "./styles";
 import { DropdownItem } from '../Dropdown/styles';
+import { createUser, removeUser } from "../../redux/user/slice";
+import { logoutMe, showMe } from "../../helpers/repositories/userRepository";
 
 export default function Navbar() {
+
+  const { user } = useSelector(rootReducer => rootReducer.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    logoutMe();
+    dispatch(removeUser());
+    navigate('/login');
+  };
+  
+  useEffect(() => {
+    if (!user) {
+      showMe()
+        .then(response => dispatch(createUser(response.data.data)))
+        .catch(() => {
+          dispatch(removeUser());
+          navigate('/login');
+        });
+    }
+  }, []);
+
   return (
     <NavbarBlock>
       <NavbarContainer>
@@ -47,7 +73,7 @@ export default function Navbar() {
               </Link>
             </DropdownItem>
             <DropdownItem>
-              <button>
+              <button onClick={onLogout}>
                 Sair
               </button>
             </DropdownItem>
