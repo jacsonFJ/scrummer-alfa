@@ -3,7 +3,7 @@ import { FaCircleUser } from "react-icons/fa6";
 import { TbTriangleInvertedFilled } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { BtnDropdown, NavbarBlock, NavbarContainer, RightGroup } from "./styles";
 import icon from '../../assets/logo-scrummer.png';
@@ -11,12 +11,14 @@ import { LogoImage } from "./styles";
 import { DropdownItem } from '../Dropdown/styles';
 import { createUser, removeUser } from "../../redux/user/slice";
 import { logoutMe, showMe } from "../../helpers/repositories/userRepository";
+import ChangePassword from "../Modals/ChangePassword";
 
 export default function Navbar() {
 
   const { user } = useSelector(rootReducer => rootReducer.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
   const onLogout = () => {
     logoutMe();
@@ -57,7 +59,11 @@ export default function Navbar() {
           <BtnDropdown
             buttonContent={
               <>
-                <FaCircleUser className="navbar-icon" />
+                {user?.picture_url ? (
+                  <img src={user.picture_url} className="navbar-icon" />
+                ) : (
+                  <FaCircleUser className="navbar-icon" />
+                )}
                 <TbTriangleInvertedFilled className="navbar-arrow" />
               </>
             }
@@ -68,9 +74,9 @@ export default function Navbar() {
               </Link>
             </DropdownItem>
             <DropdownItem>
-              <Link to='/projetos/teste/usuarios'>
+              <button onClick={() => setIsPasswordModalOpen(true)}>
                 Alterar senha
-              </Link>
+              </button>
             </DropdownItem>
             <DropdownItem>
               <button onClick={onLogout}>
@@ -80,6 +86,10 @@ export default function Navbar() {
           </BtnDropdown>
         </RightGroup>
       </NavbarContainer>
+      <ChangePassword
+        isOpen={isPasswordModalOpen}
+        closeModal={() => setIsPasswordModalOpen(false)}
+      />
     </NavbarBlock>
   );
 }

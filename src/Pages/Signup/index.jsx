@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 import InputField from "../../Components/Forms/InputField";
 import { LoginAnchor, Block, Form, LoginHeader, ScrummerBotton } from "../Login/LoginComponents";
@@ -39,6 +40,16 @@ export default function Signup() {
       }
     }
   };
+
+  // Verifica se já existe um usuário logado
+  useEffect(() => {
+    showMe()
+      .then(response => {
+        dispatch(createUser(response.data.data));
+        navigate('/projetos');
+      })
+      .catch(() => {/*apenas ignora*/});
+  }, []);
 
   return (
     <>

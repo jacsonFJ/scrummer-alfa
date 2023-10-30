@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 import InputField from "../../Components/Forms/InputField";
 import { Input } from "../../Components/Forms/InputText";
@@ -29,6 +30,16 @@ export default function Login() {
       alert(error.response?.data?.message ?? 'Erro desconhecido!');
     }
   };
+
+  // Verifica se já existe um usuário logado
+  useEffect(() => {
+    showMe()
+      .then(response => {
+        dispatch(createUser(response.data.data));
+        navigate('/projetos');
+      })
+      .catch(() => {/*apenas ignora*/});
+  }, []);
 
   return (
     <>

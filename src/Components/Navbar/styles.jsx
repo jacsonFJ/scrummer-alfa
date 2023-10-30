@@ -50,6 +50,11 @@ export const BtnDropdown = styled(Dropdown)`
     height: 24px;
     margin-right: 4px;
   }
+  img.navbar-icon {
+    object-fit: cover;
+    border-radius: 24px;
+  }
+
   .navbar-arrow {
     width: 8px;
     height: 8px;
