@@ -12,6 +12,7 @@ import { DropdownItem } from '../Dropdown/styles';
 import { createUser, removeUser } from "../../redux/user/slice";
 import { logoutMe, showMe } from "../../helpers/repositories/userRepository";
 import ChangePassword from "../Modals/ChangePassword";
+import UpdateMe from "../Modals/UpdateMe";
 
 export default function Navbar() {
 
@@ -19,11 +20,18 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
   const onLogout = () => {
     logoutMe();
     dispatch(removeUser());
     navigate('/login');
+  };
+
+  const onUpdateMe = () => {
+    setIsUpdateModalOpen(false);
+    showMe()
+      .then(response => dispatch(createUser(response.data.data)));
   };
   
   useEffect(() => {
@@ -69,9 +77,9 @@ export default function Navbar() {
             }
           >
             <DropdownItem>
-              <Link to='/projetos'>
+              <button onClick={() => setIsUpdateModalOpen(true)}>
                 Editar perfil
-              </Link>
+              </button>
             </DropdownItem>
             <DropdownItem>
               <button onClick={() => setIsPasswordModalOpen(true)}>
@@ -89,6 +97,10 @@ export default function Navbar() {
       <ChangePassword
         isOpen={isPasswordModalOpen}
         closeModal={() => setIsPasswordModalOpen(false)}
+      />
+      <UpdateMe
+        isOpen={isUpdateModalOpen}
+        closeModal={onUpdateMe}
       />
     </NavbarBlock>
   );
