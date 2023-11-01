@@ -1,7 +1,7 @@
 import { FiBell } from "react-icons/fi";
 import { FaCircleUser } from "react-icons/fa6";
 import { TbTriangleInvertedFilled } from "react-icons/tb";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -13,6 +13,9 @@ import { createUser, removeUser } from "../../redux/user/slice";
 import { logoutMe, showMe } from "../../helpers/repositories/userRepository";
 import ChangePassword from "../Modals/ChangePassword";
 import UpdateMe from "../Modals/UpdateMe";
+import { listInvites } from "../../helpers/repositories/inviteRepository";
+import ShowInvite from "../Modals/ShowInvite";
+import Colors from "../../Colors";
 
 export default function Navbar() {
 
@@ -21,6 +24,9 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
+  const [invites, setInvites] = useState([]);
+  const [modalInvite, setModalInvite] = useState(null);
 
   const onLogout = () => {
     logoutMe();
@@ -33,6 +39,16 @@ export default function Navbar() {
     showMe()
       .then(response => dispatch(createUser(response.data.data)));
   };
+
+  const openInvite = invite => {
+    setModalInvite(invite);
+    setIsInviteModalOpen(true);
+  };
+
+  const closeInvite = () => {
+    setIsInviteModalOpen(false);
+    listInvites(setInvites);
+  };
   
   useEffect(() => {
     if (!user) {
@@ -43,6 +59,13 @@ export default function Navbar() {
           navigate('/login');
         });
     }
+    
+    listInvites(setInvites);
+    const interval = setInterval(() => {
+      listInvites(setInvites);
+    }, 30000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -53,16 +76,38 @@ export default function Navbar() {
         </LogoImage>
         <RightGroup>
           <BtnDropdown
-              buttonContent={
-                <>
-                  <FiBell className="navbar-icon" />
-                  <TbTriangleInvertedFilled className="navbar-arrow" />
-                  </>
+            onOpen={() => listInvites(setInvites)}
+            buttonContent={
+              <>
+                <FiBell className="navbar-icon" />
+                <TbTriangleInvertedFilled className="navbar-arrow" />
+                {invites.length > 0 && (<div
+                  style={{
+                    width: '8px',
+                    height: '8px',
+                    backgroundColor: Colors.warning500,
+                    borderRadius: '8px',
+                    position: 'absolute',
+                    top: '0px',
+                    right: '8px',
+                  }}
+                />)}
+              </>
             }
           >
-            <DropdownItem>
-              teste de notificação
-            </DropdownItem>
+            {invites.length > 0 ? (
+              <>
+                {invites.map(invite => (
+                  <DropdownItem key={invite.id}>
+                    <button onClick={() => openInvite(invite)}>
+                      Você foi convidado para um projeto
+                    </button>
+                  </DropdownItem>
+                ))}
+              </>
+            ) : (
+              <DropdownItem>Não há convites</DropdownItem>
+            )}
           </BtnDropdown>
           <BtnDropdown
             buttonContent={
@@ -101,6 +146,11 @@ export default function Navbar() {
       <UpdateMe
         isOpen={isUpdateModalOpen}
         closeModal={onUpdateMe}
+      />
+      <ShowInvite
+        isOpen={isInviteModalOpen}
+        closeModal={closeInvite}
+        invite={modalInvite}
       />
     </NavbarBlock>
   );

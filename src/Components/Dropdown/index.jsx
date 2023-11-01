@@ -11,6 +11,8 @@ export default function Dropdown(props) {
 
   const onClickButton = () => {
     if (!active) {
+      if (props.onOpen)
+        props.onOpen();
       setActive(true);
       document.addEventListener('mousedown', onClickOut);
     } else {

@@ -15,6 +15,7 @@ const Colors = {
   danger400: '#C54949',
   danger500: '#B71C1C',
   danger700: '#821414',
+  warning500: '#FFAB00',
 }
 
 export default Colors;
