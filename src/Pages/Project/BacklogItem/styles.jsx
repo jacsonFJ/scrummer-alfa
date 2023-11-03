@@ -78,7 +78,7 @@ export const LeftEvents = styled.div`
   }
 `;
 
-export const CommentArea = styled.div`
+export const CommentArea = styled.form`
   width: 100%;
   margin-bottom: 40px;
   display: flex;

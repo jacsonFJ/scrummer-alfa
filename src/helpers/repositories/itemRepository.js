@@ -69,3 +69,15 @@ export function changeItemStage(itemId, stageId, callback) {
     .then(() => callback())
     .catch(() => alert('Erro!'));
 }
+
+export function itemHistory(id, callback) {
+  http.get(`/api/items/${id}/history`)
+    .then(response => callback(response.data.data))
+    .catch(() => alert('Erro no histórico!'));
+}
+
+export function itemComment(id, data, callback) {
+  http.post(`/api/items/${id}/comments`, data)
+    .then(() => callback())
+    .catch(() => alert('Erro no comentário!'));
+}

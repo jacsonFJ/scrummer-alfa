@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FiEdit } from 'react-icons/fi';
+import { useForm } from 'react-hook-form';
 
 import Navbar from '../../../Components/Navbar/index';
 import HeaderProject from '../../../Components/HeaderProject/index';
@@ -10,23 +11,27 @@ import { ImgCircle } from '../../../Components/Images';
 import InputSelect from '../../../Components/Forms/InputSelect';
 import HistoryEvent from '../../../Components/HistoryEvent';
 import Note from '../../../Components/Note';
-import InputTextArea from '../../../Components/Forms/InputTextArea';
 import { showProject } from '../../../helpers/repositories/projectRepository';
-import { addUserToItem, changeItemStage, deleteItem, removeUserFromItem, showItem } from '../../../helpers/repositories/itemRepository';
+import { addUserToItem, changeItemStage, deleteItem, itemComment, itemHistory, removeUserFromItem, showItem } from '../../../helpers/repositories/itemRepository';
 import StoreItem from '../../../Components/Modals/StoreItem';
 import UserSelect from '../../../Components/UserSelect';
+import { Input } from '../../../Components/Forms/InputText';
 
 export default function BacklogItem() {
+
+  const [history, setHistory] = useState([]);
   const [project, setProject] = useState(null);
   const [item, setItem] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const { id, itemId } = useParams();
   const navigate = useNavigate();
+  const {register, handleSubmit, reset} = useForm();
 
   useEffect(() => {
     showProject(id, setProject);
     showItem(itemId, setItem);
+    itemHistory(itemId, setHistory);
   }, [id, itemId]);
 
   const openModal = () => setModalIsOpen(true);
@@ -43,6 +48,13 @@ export default function BacklogItem() {
 
   const onStageChange = event => {
     changeItemStage(itemId, event.target.value, () => showItem(itemId, setItem));
+  };
+
+  const subtmitAction = data => {
+    itemComment(itemId, data, () => {
+      reset();
+      itemHistory(itemId, setHistory);
+    });
   };
 
   return (
@@ -68,23 +80,19 @@ export default function BacklogItem() {
             <LeftSide>
               <ItemDescription dangerouslySetInnerHTML={{__html: item.description}} />
               <LeftEvents>
-                <HistoryEvent icon='edit'>
-                  <strong>Loreta</strong> criou este item em <strong>04/06/2023 11:43</strong>
-                </HistoryEvent>
-                <HistoryEvent icon='edit'>
-                  <strong>Loreta</strong> editou a descrição em <strong>04/06/2023 11:45</strong>
-                </HistoryEvent>
-                <HistoryEvent>
-                  <strong>Loreta</strong> adicionou <strong>Jacson</strong> como participante em <strong>04/06/2023 11:43</strong>
-                </HistoryEvent>
-                <Note />
-                <HistoryEvent>
+                {history.map(hEvent => <Note key={hEvent.id} note={hEvent} />)}
+                {/* <HistoryEvent>
                   <strong>Jacson</strong>  editou a descrição em <strong>04/06/2023 12:43</strong>
-                </HistoryEvent>
+                </HistoryEvent> */}
               </LeftEvents>
-              <CommentArea>
-                <InputTextArea placeholder="Comentar..." style={{minHeight: '67px'}} />
-                <ButtonWhite>
+              <CommentArea onSubmit={handleSubmit(subtmitAction)}>
+                <Input
+                  as="textarea"
+                  placeholder="Comentar..."
+                  {...register('description')}
+                  style={{minHeight: '67px'}}
+                />
+                <ButtonWhite type="submit">
                   Comentar
                 </ButtonWhite>
               </CommentArea>
