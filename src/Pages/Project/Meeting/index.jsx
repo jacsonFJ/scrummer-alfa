@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 import Navbar from '../../../Components/Navbar/index';
 import HeaderProject from '../../../Components/HeaderProject/index';
@@ -8,18 +9,20 @@ import { ButtonDanger, ButtonPlus, ButtonTrash, ButtonWhite } from '../../../Com
 import { ImgCircle } from '../../../Components/Images';
 import HistoryEvent from '../../../Components/HistoryEvent';
 import Note from '../../../Components/Note';
-import InputTextArea from '../../../Components/Forms/InputTextArea';
 import { showProject } from '../../../helpers/repositories/projectRepository';
-import { addUserToMeeting, deleteMeeting, removeUserFromMeeting, showMeeting } from '../../../helpers/repositories/meetingRepository';
+import { addUserToMeeting, deleteMeeting, meetingComment, meetingHistory, removeUserFromMeeting, showMeeting } from '../../../helpers/repositories/meetingRepository';
 import UserSelect from '../../../Components/UserSelect';
+import { Input } from '../../../Components/Forms/InputText';
 
 export default function Meeting() {
 
   const [project, setProject] = useState(null);
   const [meeting, setMeeting] = useState(null);
+  const [history, setHistory] = useState([]);
   
   const { id, meetingId } = useParams();
   const navigate = useNavigate();
+  const {register, handleSubmit, reset} = useForm();
 
   const onDelete = () => {
     deleteMeeting(meetingId, () => navigate(`/projetos/${id}/sprint/${meeting.sprint_id}`));
@@ -33,9 +36,17 @@ export default function Meeting() {
     removeUserFromMeeting(meetingId, userId, () => showMeeting(meetingId, setMeeting));
   };
 
+  const subtmitAction = data => {
+    meetingComment(meetingId, data, () => {
+      reset();
+      meetingHistory(meetingId, setHistory);
+    });
+  };
+
   useEffect(() => {
     showProject(id, setProject);
     showMeeting(meetingId, setMeeting);
+    meetingHistory(meetingId, setHistory);
   }, [id, meetingId]);
 
   return (
@@ -61,22 +72,18 @@ export default function Meeting() {
                 <LeftSide>
                   <ItemDescription dangerouslySetInnerHTML={{__html: meeting.description}} />
                   <LeftEvents>
-                    <HistoryEvent icon='edit'>
-                      <strong>Loreta</strong> criou este item em <strong>04/06/2023 11:43</strong>
-                    </HistoryEvent>
-                    <HistoryEvent icon='edit'>
-                      <strong>Loreta</strong> editou a descrição em <strong>04/06/2023 11:45</strong>
-                    </HistoryEvent>
-                    <HistoryEvent>
-                      <strong>Loreta</strong> adicionou <strong>Jacson</strong> como participante em <strong>04/06/2023 11:43</strong>
-                    </HistoryEvent>
-                    <Note />
-                    <HistoryEvent>
+                    {history.map(hEvent => <Note key={hEvent.id} note={hEvent} />)}
+                    {/* <HistoryEvent>
                       <strong>Jacson</strong>  editou a descrição em <strong>04/06/2023 12:43</strong>
-                    </HistoryEvent>
+                    </HistoryEvent> */}
                   </LeftEvents>
-                  <CommentArea>
-                    <InputTextArea placeholder="Comentar..." style={{minHeight: '67px'}} />
+                  <CommentArea onSubmit={handleSubmit(subtmitAction)}>
+                  <Input
+                    as="textarea"
+                    placeholder="Comentar..."
+                    {...register('description')}
+                    style={{minHeight: '67px'}}
+                  />
                     <ButtonWhite>
                       Comentar
                     </ButtonWhite>

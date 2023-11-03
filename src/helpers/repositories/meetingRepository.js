@@ -35,3 +35,15 @@ export function removeUserFromMeeting(meetingId, userId, callback) {
     .then(() => callback())
     .catch(() => alert('Erro!'));
 }
+
+export function meetingHistory(id, callback) {
+  http.get(`/api/meetings/${id}/history`)
+    .then(response => callback(response.data.data))
+    .catch(() => alert('Erro no histórico!'));
+}
+
+export function meetingComment(id, data, callback) {
+  http.post(`/api/meetings/${id}/comments`, data)
+    .then(() => callback())
+    .catch(() => alert('Erro no comentário!'));
+}
