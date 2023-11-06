@@ -18,10 +18,10 @@ export default function Login() {
   const navigate = useNavigate();
 
   const subtmitAction = async (data) => {
-    await http.get('/sanctum/csrf-cookie');
+    await http().get('/sanctum/csrf-cookie');
 
     try {
-      await http.post('/api/login', data);
+      await http().post('/api/login', data);
       const response = await showMe();
       dispatch(createUser(response.data.data));
       navigate('/projetos');

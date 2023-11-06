@@ -1,11 +1,15 @@
 import axios from 'axios';
 
-const http = axios.create({
-  baseURL: 'http://localhost',
-  // headers: {
-  //   'X-Requested-With': 'XMLHttpRequest',
-  // },
-  withCredentials: true,
-});
+export default function http() {
+  const headers = {};
+  const token = localStorage.getItem('access-token');
+  if (token)
+    headers.Authorization = token;
 
-export default http;
+  return axios.create({
+    baseURL: 'http://localhost',
+    // baseURL: 'http://143.244.166.83',
+    headers,
+    // withCredentials: true,
+  });
+};

@@ -28,7 +28,7 @@ export default function ProjectsListTemplate(props) {
   const closeModal = () => setModalIsOpen(false);
 
   const subtmitAction = (data) => {
-    http.post('/api/projects', data)
+    http().post('/api/projects', data)
       .then(() => closeModal())
       .catch(error => {
         if (error.response?.data?.message === 'Dados inválidos!') {

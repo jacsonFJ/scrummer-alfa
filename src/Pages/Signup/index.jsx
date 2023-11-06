@@ -23,10 +23,10 @@ export default function Signup() {
   const dispatch = useDispatch();
 
   const subtmitAction = async (data) => {
-    await http.get('/sanctum/csrf-cookie');
+    await http().get('/sanctum/csrf-cookie');
 
     try {
-      await http.post('/api/signup', data);
+      await http().post('/api/signup', data);
       const response = await showMe();
       dispatch(createUser(response.data.data));
       navigate('/projetos');

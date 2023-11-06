@@ -38,13 +38,13 @@ export default function StoreItem(props) {
 
   const store = (data) => {
     const parsed = {project_id: props.projectId, ...data};
-    http.post('/api/items', parsed)
+    http().post('/api/items', parsed)
       .then(response => navigate(`/projetos/${props.projectId}/item/${response.data.data.id}`))
       .catch(treatError);
   };
 
   const update = (data) => {
-    http.put(`/api/items/${props.item.id}`, data)
+    http().put(`/api/items/${props.item.id}`, data)
       .then(() => props.closeModal)
       .catch(treatError);
   };

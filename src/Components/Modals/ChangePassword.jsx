@@ -26,7 +26,7 @@ export default function ChangePassword({ isOpen, closeModal }) {
   } = useForm();
 
   const subtmitAction = data => {
-    http.patch(`/api/users/me/password`, data)
+    http().patch(`/api/users/me/password`, data)
       .then(() => closeModal())
       .catch(error => {
         const message = error.response?.data?.message;

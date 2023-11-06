@@ -25,7 +25,7 @@ export default function StoreSprint(props) {
     if (parsed.start_at instanceof Date)
       parsed.start_at = format(parsed.start_at, 'dd/MM/yyyy');
 
-    http.post(`/api/projects/${props.projectId}/sprints`, parsed)
+    http().post(`/api/projects/${props.projectId}/sprints`, parsed)
       .then(response => props.onSuccess(response.data.data))
       .catch(error => {
         const message = error.response?.data?.message;

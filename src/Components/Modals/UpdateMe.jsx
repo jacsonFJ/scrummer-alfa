@@ -30,7 +30,7 @@ export default function UpdateMe({ isOpen, closeModal }) {
     if (data.email)
       formData.append('email', data.email);
 
-    http.post('/api/users/me', formData, {headers: {"Content-Type": "multipart/form-data"}})
+    http().post('/api/users/me', formData, {headers: {"Content-Type": "multipart/form-data"}})
       .then(() => closeModal())
       .catch(error => {
         const message = error.response?.data?.message;

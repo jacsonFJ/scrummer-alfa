@@ -41,43 +41,43 @@ export function listSprint(sprintId, params, callback) {
 }
 
 export function showItem(id, callback) {
-  http.get(`/api/items/${id}`)
+  http().get(`/api/items/${id}`)
     .then(response => callback(response.data.data))
     .catch(() => alert('Erro!'));
 }
 
 export function deleteItem(id, callback) {
-  http.delete(`/api/items/${id}`)
+  http().delete(`/api/items/${id}`)
     .then(() => callback())
     .catch(() => alert('Erro!'));
 }
 
 export function addUserToItem(itemId, userId, callback) {
-  http.post(`/api/items/${itemId}/users`, {user_id: userId})
+  http().post(`/api/items/${itemId}/users`, {user_id: userId})
     .then(() => callback())
     .catch(() => alert('Erro!'));
 }
 
 export function removeUserFromItem(itemId, userId, callback) {
-  http.delete(`/api/items/${itemId}/users/${userId}`)
+  http().delete(`/api/items/${itemId}/users/${userId}`)
     .then(() => callback())
     .catch(() => alert('Erro!'));
 }
 
 export function changeItemStage(itemId, stageId, callback) {
-  http.patch(`/api/items/${itemId}/stages`, {stage_id: stageId})
+  http().patch(`/api/items/${itemId}/stages`, {stage_id: stageId})
     .then(() => callback())
     .catch(() => alert('Erro!'));
 }
 
 export function itemHistory(id, callback) {
-  http.get(`/api/items/${id}/history`)
+  http().get(`/api/items/${id}/history`)
     .then(response => callback(response.data.data))
     .catch(() => alert('Erro no histórico!'));
 }
 
 export function itemComment(id, data, callback) {
-  http.post(`/api/items/${id}/comments`, data)
+  http().post(`/api/items/${id}/comments`, data)
     .then(() => callback())
     .catch(() => alert('Erro no comentário!'));
 }

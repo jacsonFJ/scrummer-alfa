@@ -18,7 +18,7 @@ export default function UserSelect({buttonType, endpoint, onSelectUser}) {
 
   const onClickButton = () => {
     if (!active) {
-      http.get(endpoint)
+      http().get(endpoint)
         .then(response => {
           setUsers(response.data.data);
           setActive(true);

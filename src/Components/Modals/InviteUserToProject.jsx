@@ -26,7 +26,7 @@ export default function InviteUserToProject({ isOpen, closeModal, projectId }) {
   } = useForm();
 
   const subtmitAction = data => {
-    http.post(`/api/projects/${projectId}/users/create-invite`, data)
+    http().post(`/api/projects/${projectId}/users/create-invite`, data)
       .then(() => closeModal())
       .catch(error => {
         const message = error.response?.data?.message;

@@ -42,7 +42,7 @@ export default function HeaderProject({ project }) {
   const closeModal = () => setModalIsOpen(false);
 
   const subtmitAction = (data) => {
-    http.put(`/api/projects/${project.id}`, data)
+    http().put(`/api/projects/${project.id}`, data)
       .then(() => closeModal())
       .catch(error => {
         if (error.response?.data?.message === 'Dados inválidos!') {
@@ -56,7 +56,7 @@ export default function HeaderProject({ project }) {
   };
 
   const destroyAction = () => {
-    http.delete(`/api/projects/${project.id}`)
+    http().delete(`/api/projects/${project.id}`)
       .then(() => navigate('/projetos'))
       .catch(() => alert('Erro desconhecido!'));
   };

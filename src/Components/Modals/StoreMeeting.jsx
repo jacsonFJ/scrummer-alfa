@@ -28,7 +28,7 @@ export default function StoreMeeting(props) {
     parsed.project_id = props.sprint.project_id;
     parsed.sprint_id = props.sprint.id;
 
-    http.post('/api/meetings', parsed)
+    http().post('/api/meetings', parsed)
       .then(() => props.onSuccess())
       .catch(error => {
         const message = error.response?.data?.message;
