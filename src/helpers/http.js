@@ -7,8 +7,8 @@ export default function http() {
     headers.Authorization = `Bearer ${token}`;
 
   return axios.create({
-    baseURL: 'http://localhost',
-    // baseURL: 'http://143.244.166.83',
+    // baseURL: 'http://localhost',
+    baseURL: 'http://143.244.166.83',
     headers,
     // withCredentials: true,
   });
