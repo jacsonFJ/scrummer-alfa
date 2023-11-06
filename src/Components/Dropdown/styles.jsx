@@ -54,14 +54,16 @@ export const DropdownItem = styled.li`
   display: flex;
   white-space: nowrap;
   width: 100%;
-  padding: 4px 12px;
+  padding: 0px;
 
   a, button {
     color: ${Colors.secondary900};
     font-size: 12px;
     font-weight: 400;
     text-decoration: none;
-    padding: 0px;
+    text-align: left;
+    padding: 4px 12px;
+    width: 100%;
     border: none;
     background-color: transparent;
     cursor: pointer;
