@@ -4,7 +4,7 @@ export default function http() {
   const headers = {};
   const token = localStorage.getItem('access-token');
   if (token)
-    headers.Authorization = token;
+    headers.Authorization = `Bearer ${token}`;
 
   return axios.create({
     baseURL: 'http://localhost',

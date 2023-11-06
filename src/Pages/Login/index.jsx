@@ -14,20 +14,33 @@ import { createUser } from '../../redux/user/slice';
 export default function Login() {
   
   const dispatch = useDispatch();
-  const {register, handleSubmit} = useForm();
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
 
   const subtmitAction = async (data) => {
     await http().get('/sanctum/csrf-cookie');
 
     try {
-      await http().post('/api/login', data);
-      const response = await showMe();
-      dispatch(createUser(response.data.data));
+      const response = await http().post('/api/login', data);
+      localStorage.setItem('access-token', response.data.data.token);
+
+      const meResponse = await showMe();
+      dispatch(createUser(meResponse.data.data));
       navigate('/projetos');
+
     } catch (error) {
-      console.error(error);
-      alert(error.response?.data?.message ?? 'Erro desconhecido!');
+      if (error.response?.data?.message === 'Dados inválidos!') {
+        error.response.data.errors.forEach(
+          (errorItem) => setError(errorItem.field, { type: 'server', message: errorItem.error })
+        );
+      } else {
+        alert('Erro desconhecido!');
+      }
     }
   };
 
@@ -45,10 +58,10 @@ export default function Login() {
     <>
       <LoginHeader title="Login no Scrummer" />
       <Form onSubmit={handleSubmit(subtmitAction)}>
-        <InputField title="E-mail">
+        <InputField title="E-mail" error={errors.email?.message}>
           <Input {...register('email')} />
         </InputField>
-        <InputField title="Senha">
+        <InputField title="Senha" error={errors.password?.message}>
           <Input type="password" {...register('password')} />
         </InputField>
         <ButtonSuccess width="100%" type="submit">

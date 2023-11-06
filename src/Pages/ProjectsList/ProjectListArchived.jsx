@@ -9,7 +9,7 @@ export default function ProjectListArchived() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    http
+    http()
       .get('/api/projects/archiveds', {
         params: {
           per_page: 5,

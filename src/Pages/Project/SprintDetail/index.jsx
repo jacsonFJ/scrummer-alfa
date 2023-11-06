@@ -126,7 +126,7 @@ export default function SprintDetail() {
                     <ButtonPlus onClick={openMeetingModal} />
                   </CardListTitle>
                   {meetings.map((meeting) => (
-                    <ItemMeeting meeting={meeting} projectId={id} />
+                    <ItemMeeting key={meeting.id} meeting={meeting} projectId={id} />
                   ))}
                   <CardListBottom>
                     {meetingsPagination.last_page && (

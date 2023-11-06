@@ -26,10 +26,13 @@ export default function Signup() {
     await http().get('/sanctum/csrf-cookie');
 
     try {
-      await http().post('/api/signup', data);
-      const response = await showMe();
-      dispatch(createUser(response.data.data));
+      const response = await http().post('/api/signup', data);
+      localStorage.setItem('access-token', response.data.data.token);
+      
+      const meResponse = await showMe();
+      dispatch(createUser(meResponse.data.data));
       navigate('/projetos');
+
     } catch (error) {
       if (error.response?.data?.message === 'Dados inválidos!') {
         error.response.data.errors.forEach(

@@ -9,7 +9,7 @@ export default function ProjectListInProgress() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    http
+    http()
       .get('/api/projects/in-progress', {
         params: {
           per_page: 5,

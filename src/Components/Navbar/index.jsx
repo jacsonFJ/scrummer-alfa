@@ -31,6 +31,7 @@ export default function Navbar() {
   const onLogout = () => {
     logoutMe();
     dispatch(removeUser());
+    localStorage.removeItem('access-token');
     navigate('/login');
   };
 

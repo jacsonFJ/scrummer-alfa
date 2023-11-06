@@ -9,7 +9,7 @@ export default function ProjectListMine() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    http
+    http()
       .get('/api/projects/mine', {
         params: {
           per_page: 5,

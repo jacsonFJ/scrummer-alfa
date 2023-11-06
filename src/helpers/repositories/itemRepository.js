@@ -1,7 +1,7 @@
 import http from "../http";
 
 export function listProductBacklog(projectId, params, callback) {
-  http
+  http()
     .get('/api/items/product-backlog', {
       params: {
         per_page: 10,
@@ -17,7 +17,7 @@ export function listProductBacklog(projectId, params, callback) {
 }
 
 export function listSprintBacklog(sprintId, params, callback) {
-  http
+  http()
     .get('/api/items/sprint-backlog', {
       params: {
         sprint_id: sprintId,
@@ -29,7 +29,7 @@ export function listSprintBacklog(sprintId, params, callback) {
 }
 
 export function listSprint(sprintId, params, callback) {
-  http
+  http()
     .get('/api/items/sprint', {
       params: {
         sprint_id: sprintId,
