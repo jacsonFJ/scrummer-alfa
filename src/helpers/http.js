@@ -8,7 +8,7 @@ export default function http() {
 
   return axios.create({
     // baseURL: 'http://localhost',
-    baseURL: 'http://143.244.166.83',
+    baseURL: 'https://jacsonfj.com.br',
     headers,
     // withCredentials: true,
   });
