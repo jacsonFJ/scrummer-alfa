@@ -14,7 +14,7 @@ export default function Dropdown(props) {
       if (props.onOpen)
         props.onOpen();
       setActive(true);
-      document.addEventListener('mousedown', onClickOut);
+      setTimeout(() =>document.addEventListener('click', onClickOut), 100);
     } else {
       closeDropdown();
     }
@@ -26,7 +26,7 @@ export default function Dropdown(props) {
 
   const closeDropdown = () => {
     setActive(false);
-    document.removeEventListener('mousedown', onClickOut);
+    document.removeEventListener('click', onClickOut);
   };
 
   return (

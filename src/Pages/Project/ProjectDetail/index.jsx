@@ -33,7 +33,7 @@ export default function ProjectDetail() {
           </Description>
           <div style={{display: 'flex', flexDirection: 'column'}}>
             <Participants>
-              <SectionTitle to="/projetos/teste/usuarios">
+              <SectionTitle to={`/projetos/${id}/usuarios`}>
                 Participantes
               </SectionTitle>
               {project.users.map(user => (
