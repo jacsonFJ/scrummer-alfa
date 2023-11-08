@@ -28,7 +28,14 @@ export default function ProductBacklog() {
   const { id } = useParams();
 
   const openModal = () => setModalIsOpen(true);
-  const closeModal = () => setModalIsOpen(false);
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    listProductBacklog(id, {page, ...filterData}, response => {
+      setItems(response.data);
+      setPagination(response.meta);
+    });
+  };
 
   useEffect(() => {
     showProject(id, setProject);

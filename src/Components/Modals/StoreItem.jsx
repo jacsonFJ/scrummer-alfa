@@ -16,7 +16,7 @@ export default function StoreItem(props) {
   if (props.item) {
     formParams.defaultValues = {
       title: props.item.title,
-      description: props.item.description,
+      description: props.item.description.replace(/<br\s?\/?>/g, '\n'),
     };
   }
   const {
@@ -39,13 +39,13 @@ export default function StoreItem(props) {
   const store = (data) => {
     const parsed = {project_id: props.projectId, ...data};
     http().post('/api/items', parsed)
-      .then(response => navigate(`/projetos/${props.projectId}/item/${response.data.data.id}`))
+      .then(() => props.closeModal())
       .catch(treatError);
   };
 
   const update = (data) => {
     http().put(`/api/items/${props.item.id}`, data)
-      .then(() => props.closeModal)
+      .then(() => props.closeModal())
       .catch(treatError);
   };
 

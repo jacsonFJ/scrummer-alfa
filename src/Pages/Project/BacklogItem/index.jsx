@@ -35,7 +35,12 @@ export default function BacklogItem() {
   }, [id, itemId]);
 
   const openModal = () => setModalIsOpen(true);
-  const closeModal = () => setModalIsOpen(false);
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    showItem(itemId, setItem);
+  };
+
   const destroy = () => deleteItem(itemId, () => navigate(`/projetos/${id}/product-backlog`));
 
   const onSelectUser = userId => {
