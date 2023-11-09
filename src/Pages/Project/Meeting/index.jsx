@@ -54,7 +54,7 @@ export default function Meeting() {
       <Navbar />
       {project && (
         <>
-          <HeaderProject project={project} />
+          <HeaderProject project={project} setProject={setProject} />
           {meeting && (
             <BacklogItemContainer>
               <Row40>

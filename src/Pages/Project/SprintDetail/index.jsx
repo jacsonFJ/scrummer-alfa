@@ -85,7 +85,7 @@ export default function SprintDetail() {
       <Navbar />
       {project && (
         <>
-          <HeaderProject project={project} />
+          <HeaderProject project={project} setProject={setProject} />
           {sprint && (
             <BacklogItemContainer>
               <Row40>

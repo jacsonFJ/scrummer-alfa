@@ -47,7 +47,7 @@ export default function IncrementOnSoftware() {
       <Navbar />
       {project && (
         <>
-          <HeaderProject project={project} />
+          <HeaderProject project={project} setProject={setProject} />
           <BacklogList style={{marginTop: '40px'}}>
             <IncrementsFilter setFilterData={setFilterData} defaultFilterData={defaultFilterData} />
             {sprints.map(sprint => (

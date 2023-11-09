@@ -22,7 +22,7 @@ export default function ProjectDetail() {
     <>
       <Navbar />
       {project && <>
-        <HeaderProject project={project} />
+        <HeaderProject project={project} setProject={setProject} />
         <ProjectContainer>
           <Description>
             <DescriptionTitle>

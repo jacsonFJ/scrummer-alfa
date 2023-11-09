@@ -38,7 +38,7 @@ export default function ProjectUsers() {
       <Navbar />
       {project && (
         <>
-          <HeaderProject project={project} />
+          <HeaderProject project={project} setProject={setProject} />
           <UsersContainer>
             <ButtonSuccess onClick={() => setIsInviteModalOpen(true)}>
               Adicionar Participante

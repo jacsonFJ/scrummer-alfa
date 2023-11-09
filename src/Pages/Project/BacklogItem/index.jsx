@@ -66,7 +66,7 @@ export default function BacklogItem() {
     <>
       <Navbar />
       {project && item && <>
-        <HeaderProject project={project} />
+        <HeaderProject project={project} setProject={setProject} />
         <BacklogItemContainer>
           <Row40>
             <ItemTitle>

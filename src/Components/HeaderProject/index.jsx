@@ -4,6 +4,8 @@ import { TbTriangleInvertedFilled } from 'react-icons/tb';
 import { styled } from 'styled-components';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ReactModal from 'react-modal';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { HeaderBlock, HeaderLink, IconBlock, IconBox, LinksList } from '../Header/styles';
 import Colors from '../../Colors';
@@ -13,9 +15,8 @@ import InputField from '../Forms/InputField';
 import { Input } from '../Forms/InputText';
 import { ModalForm, ModalHeader, ModalSeparator, modalStyles } from '../ModalComponents';
 import { ButtonSuccess } from '../Buttons';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import http from '../../helpers/http';
+import { showProject } from '../../helpers/repositories/projectRepository';
 
 const BtnDropDown = styled(Dropdown)`
   padding: 6px;
@@ -27,7 +28,7 @@ const BtnDropDown = styled(Dropdown)`
   cursor: pointer;
 `;
 
-export default function HeaderProject({ project }) {
+export default function HeaderProject({ project, setProject }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -43,7 +44,11 @@ export default function HeaderProject({ project }) {
 
   const subtmitAction = (data) => {
     http().put(`/api/projects/${project.id}`, data)
-      .then(() => closeModal())
+      .then(() => {
+        closeModal();
+        if (setProject)
+          showProject(project.id, setProject);
+      })
       .catch(error => {
         if (error.response?.data?.message === 'Dados inválidos!') {
           error.response.data.errors.forEach(

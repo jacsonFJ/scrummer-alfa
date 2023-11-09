@@ -52,7 +52,7 @@ export default function ProductBacklog() {
     <>
       <Navbar />
       {project && <>
-        <HeaderProject project={project} />
+        <HeaderProject project={project} setProject={setProject} />
         <BacklogContainer>
           <ButtonSuccess onClick={openModal}>
             Adicionar Item

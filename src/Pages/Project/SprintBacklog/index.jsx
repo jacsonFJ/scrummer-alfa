@@ -59,7 +59,7 @@ export default function SprintBacklog() {
     <>
       <Navbar />
       {project && <>
-        <HeaderProject project={project} />
+        <HeaderProject project={project} setProject={setProject} />
         {sprint ? (
           <>
             <BacklogContainer>
