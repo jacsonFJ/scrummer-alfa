@@ -133,7 +133,9 @@ export default function BacklogItem() {
                 <InputSelect defaultValue={item.stage_id} onChange={onStageChange}>
                   <option value="1">Product Backlog</option>
                   <option value="2">Sprint Backlog</option>
-                  <option value="3">Working Increment of the Software</option>
+                  {item.stage_id == 3 && (
+                    <option value="3">Working Increment of the Software</option>
+                  )}
                 </InputSelect>
               </RightRow>
             </RightSide>
