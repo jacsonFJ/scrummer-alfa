@@ -1,5 +1,6 @@
 import ReactModal from 'react-modal';
 import { FiX } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 import { ModalForm, ModalHeader, ModalSeparator, modalStyles } from "../ModalComponents";
 import { ButtonDanger, ButtonSuccess } from '../Buttons';
@@ -14,8 +15,14 @@ export default function ShowInvite({ isOpen, closeModal, invite }) {
       maxWidth: '400px',
     }
   };
+  
+  const navigate = useNavigate();
 
-  const onAccept = () => acceptInvite(invite.id, closeModal);
+  const onAccept = () => {
+    acceptInvite(invite.id, closeModal);
+    navigate(`/projetos/${invite.project.id}/detalhes`);
+  };
+
   const onRefuse = () => refuseInvite(invite.id, closeModal);
 
   return (
@@ -27,7 +34,7 @@ export default function ShowInvite({ isOpen, closeModal, invite }) {
     >
       <ModalForm as='div'>
         <ModalHeader>
-          <h2>Você foi convidado para o projeto {invite?.project}</h2>
+          <h2>Você foi convidado para o projeto {invite?.project?.name}</h2>
           <button onClick={closeModal}>
             <FiX size={24} />
           </button>

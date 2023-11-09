@@ -46,8 +46,8 @@ export default function ProjectsListTemplate(props) {
 
   return (
     <>
-      <Navbar></Navbar>
-      <Header></Header>
+      <Navbar />
+      <Header />
       <LineButton>
         <ButtonSuccess onClick={openModal}>
           Adicionar Novo Projeto
