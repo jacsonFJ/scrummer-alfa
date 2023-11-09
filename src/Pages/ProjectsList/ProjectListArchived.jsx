@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import http from '../../helpers/http';
 import ProjectsListTemplate from "./ProjectListTemplate";
@@ -7,6 +8,7 @@ export default function ProjectListArchived() {
   const [projects, setProjects] = useState([]);
   const [pagination, setPagination] = useState({});
   const [page, setPage] = useState(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     http()
@@ -32,6 +34,7 @@ export default function ProjectListArchived() {
       pagination={pagination}
       page={page}
       setPage={setPage}
+      onNewProject={() => navigate('/meus-projetos')}
     />
   );
 }

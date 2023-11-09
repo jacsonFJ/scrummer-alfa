@@ -8,7 +8,7 @@ export default function ProjectListInProgress() {
   const [pagination, setPagination] = useState({});
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
+  const loadList = () => {
     http()
       .get('/api/projects/in-progress', {
         params: {
@@ -19,11 +19,11 @@ export default function ProjectListInProgress() {
       .then(response => {
         setProjects(response.data.data);
         setPagination(response.data.meta);
-      })
-      .catch(error => {
-        console.error('Erro na lista de projetos');
-        console.error(error);
       });
+  };
+
+  useEffect(() => {
+    loadList();
   }, [page]);
 
   return (
@@ -32,6 +32,7 @@ export default function ProjectListInProgress() {
       pagination={pagination}
       page={page}
       setPage={setPage}
+      onNewProject={loadList}
     />
   );
 }

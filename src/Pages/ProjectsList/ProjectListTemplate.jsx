@@ -29,7 +29,10 @@ export default function ProjectsListTemplate(props) {
 
   const subtmitAction = (data) => {
     http().post('/api/projects', data)
-      .then(() => closeModal())
+      .then(() => {
+        closeModal();
+        props.onNewProject();
+      })
       .catch(error => {
         if (error.response?.data?.message === 'Dados inválidos!') {
           error.response.data.errors.forEach(
