@@ -10,6 +10,5 @@ export default function http() {
     // baseURL: 'http://localhost',
     baseURL: 'https://jacsonfj.com.br',
     headers,
-    // withCredentials: true,
   });
 };
