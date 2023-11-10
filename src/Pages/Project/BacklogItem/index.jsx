@@ -39,6 +39,7 @@ export default function BacklogItem() {
   const closeModal = () => {
     setModalIsOpen(false);
     showItem(itemId, setItem);
+    itemHistory(itemId, setHistory);
   };
 
   const destroy = () => deleteItem(itemId, () => navigate(`/projetos/${id}/product-backlog`));
@@ -85,10 +86,15 @@ export default function BacklogItem() {
             <LeftSide>
               <ItemDescription dangerouslySetInnerHTML={{__html: item.description}} />
               <LeftEvents>
-                {history.map(hEvent => <Note key={hEvent.id} note={hEvent} />)}
-                {/* <HistoryEvent>
-                  <strong>Jacson</strong>  editou a descrição em <strong>04/06/2023 12:43</strong>
-                </HistoryEvent> */}
+                {history.map(hEvent => (
+                  <>
+                    {hEvent.type === 'comment' ? (
+                      <Note key={hEvent.id} note={hEvent} />
+                    ) : (
+                      <HistoryEvent key={hEvent.id} history={hEvent} />
+                    )}
+                  </>
+                ))}
               </LeftEvents>
               <CommentArea onSubmit={handleSubmit(subtmitAction)}>
                 <Input
