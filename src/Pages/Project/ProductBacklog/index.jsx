@@ -67,7 +67,7 @@ export default function ProductBacklog() {
         {pagination.last_page && (
           <Paginator pagination={pagination} page={page} setPage={setPage} />
         )}
-        <StoreItem projectId={project.id} isOpen={modalIsOpen} closeModal={closeModal} />
+        <StoreItem projectId={project.id} isOpen={modalIsOpen} onClose={closeModal} />
       </>}
     </>
   );

@@ -150,7 +150,7 @@ export default function BacklogItem() {
         <StoreItem
           projectId={project.id}
           isOpen={modalIsOpen}
-          closeModal={closeModal}
+          onClose={closeModal}
           item={item}
         />
       </>}

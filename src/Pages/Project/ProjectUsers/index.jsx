@@ -74,7 +74,7 @@ export default function ProjectUsers() {
             </UsersList>
             <InviteUserToProject
               isOpen={isInviteModalOpen}
-              closeModal={() => setIsInviteModalOpen(false)}
+              onClose={() => setIsInviteModalOpen(false)}
               projectId={id}
             />
           </UsersContainer>

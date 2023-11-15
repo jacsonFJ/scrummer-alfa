@@ -8,7 +8,7 @@ import { Input } from '../Forms/InputText';
 import { ButtonSuccess } from '../Buttons';
 import http from '../../helpers/http';
 
-export default function InviteUserToProject({ isOpen, closeModal, projectId }) {
+export default function InviteUserToProject({ isOpen, onClose, projectId }) {
 
   const customStyles = {
     ...modalStyles,
@@ -23,7 +23,13 @@ export default function InviteUserToProject({ isOpen, closeModal, projectId }) {
     handleSubmit,
     setError,
     formState: { errors },
+    reset,
   } = useForm();
+
+  const closeModal = () => {
+    reset();
+    onClose();
+  };
 
   const subtmitAction = data => {
     http().post(`/api/projects/${projectId}/users/create-invite`, data)

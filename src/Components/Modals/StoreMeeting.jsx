@@ -19,6 +19,7 @@ export default function StoreMeeting(props) {
     handleSubmit,
     setError,
     formState: { errors },
+    reset,
   } = useForm();
 
   const subtmitAction = (data) => {
@@ -29,7 +30,10 @@ export default function StoreMeeting(props) {
     parsed.sprint_id = props.sprint.id;
 
     http().post('/api/meetings', parsed)
-      .then(() => props.onSuccess())
+      .then(() => {
+        reset();
+        props.onSuccess();
+      })
       .catch(error => {
         const message = error.response?.data?.message;
         if (message === 'Dados inválidos!') {

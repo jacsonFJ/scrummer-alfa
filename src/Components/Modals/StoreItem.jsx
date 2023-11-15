@@ -1,6 +1,6 @@
 import { FiX } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
 import ReactModal from 'react-modal';
+import { useEffect } from 'react';
 
 import InputField from '../Forms/InputField';
 import { Input } from '../Forms/InputText';
@@ -10,21 +10,15 @@ import { useForm } from 'react-hook-form';
 import http from '../../helpers/http';
 
 export default function StoreItem(props) {
-  const navigate = useNavigate();
 
-  const formParams = {};
-  if (props.item) {
-    formParams.defaultValues = {
-      title: props.item.title,
-      description: props.item.description.replace(/<br\s?\/?>/g, '\n'),
-    };
-  }
   const {
     register,
     handleSubmit,
     setError,
+    setValue,
     formState: { errors },
-  } = useForm(formParams);
+    reset,
+  } = useForm();
 
   const treatError = error => {
     if (error.response?.data?.message === 'Dados inválidos!') {
@@ -39,13 +33,13 @@ export default function StoreItem(props) {
   const store = (data) => {
     const parsed = {project_id: props.projectId, ...data};
     http().post('/api/items', parsed)
-      .then(() => props.closeModal())
+      .then(() => closeModal())
       .catch(treatError);
   };
 
   const update = (data) => {
     http().put(`/api/items/${props.item.id}`, data)
-      .then(() => props.closeModal())
+      .then(() => closeModal())
       .catch(treatError);
   };
 
@@ -57,17 +51,29 @@ export default function StoreItem(props) {
     }
   };
 
+  const closeModal = () => {
+    reset();
+    props.onClose();
+  };
+
+  useEffect(() => {
+    if (props.isOpen && props.item) {
+      setValue('title', props.item.title);
+      setValue('description', props.item.description.replace(/<br\s?\/?>/g, '\n'));
+    }
+  }, [props.isOpen]);
+
   return (
     <ReactModal
       isOpen={props.isOpen}
-      onRequestClose={props.closeModal}
+      onRequestClose={closeModal}
       contentLabel="Cadastrar Item"
       style={modalStyles}
     >
       <ModalForm onSubmit={handleSubmit(subtmitAction)}>
         <ModalHeader>
           <h2>Adicionar Item</h2>
-          <button onClick={props.closeModal}>
+          <button type='button' onClick={closeModal}>
             <FiX size={24} />
           </button>
         </ModalHeader>

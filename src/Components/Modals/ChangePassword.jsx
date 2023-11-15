@@ -8,7 +8,7 @@ import { Input } from '../Forms/InputText';
 import { ButtonSuccess } from '../Buttons';
 import http from '../../helpers/http';
 
-export default function ChangePassword({ isOpen, closeModal }) {
+export default function ChangePassword({ isOpen, onClose }) {
 
   const customStyles = {
     ...modalStyles,
@@ -23,6 +23,7 @@ export default function ChangePassword({ isOpen, closeModal }) {
     handleSubmit,
     setError,
     formState: { errors },
+    reset,
   } = useForm();
 
   const subtmitAction = data => {
@@ -36,6 +37,11 @@ export default function ChangePassword({ isOpen, closeModal }) {
           );
         }
       });
+  };
+
+  const closeModal = () => {
+    onClose();
+    reset();
   };
 
   return (

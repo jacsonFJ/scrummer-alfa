@@ -18,6 +18,7 @@ export default function StoreSprint(props) {
     handleSubmit,
     setError,
     formState: { errors },
+    reset,
   } = useForm();
 
   const subtmitAction = (data) => {
@@ -26,7 +27,10 @@ export default function StoreSprint(props) {
       parsed.start_at = format(parsed.start_at, 'dd/MM/yyyy');
 
     http().post(`/api/projects/${props.projectId}/sprints`, parsed)
-      .then(response => props.onSuccess(response.data.data))
+      .then(response => {
+        reset();
+        props.onSuccess(response.data.data);
+      })
       .catch(error => {
         const message = error.response?.data?.message;
         if (message === 'Dados inválidos!') {

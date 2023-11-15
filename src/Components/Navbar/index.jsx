@@ -142,7 +142,7 @@ export default function Navbar() {
       </NavbarContainer>
       <ChangePassword
         isOpen={isPasswordModalOpen}
-        closeModal={() => setIsPasswordModalOpen(false)}
+        onClose={() => setIsPasswordModalOpen(false)}
       />
       <UpdateMe
         isOpen={isUpdateModalOpen}
