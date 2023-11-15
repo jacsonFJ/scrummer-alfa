@@ -19,8 +19,10 @@ export default function ShowInvite({ isOpen, closeModal, invite }) {
   const navigate = useNavigate();
 
   const onAccept = () => {
-    acceptInvite(invite.id, closeModal);
-    navigate(`/projetos/${invite.project.id}/detalhes`);
+    acceptInvite(invite.id, () => {
+      closeModal();
+      navigate(`/projetos/${invite.project.id}/detalhes`);
+    });
   };
 
   const onRefuse = () => refuseInvite(invite.id, closeModal);
