@@ -11,6 +11,7 @@ export default function InputDate({ control, name }) {
           placeholderText='dd/mm/aaaa'
           onChange={field.onChange}
           selected={field.value}
+          dateFormat="dd/MM/yyyy"
         />
       )}
     />

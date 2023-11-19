@@ -10,7 +10,7 @@ import { CardList, CardListBottom, CardListTitle, CardsRow } from "./styles";
 import { ItemBacklogSmall, ItemMeeting } from "../../../Components/ListItems";
 import PaginatorSmall from "../../../Components/PaginatorSmall";
 import { showProject } from "../../../helpers/repositories/projectRepository";
-import { showSprint } from "../../../helpers/repositories/sprintRepository";
+import { closeSprint, showSprint } from "../../../helpers/repositories/sprintRepository";
 import { listSprint } from "../../../helpers/repositories/itemRepository";
 import { listSprintMeetings } from "../../../helpers/repositories/meetingRepository";
 import StoreMeeting from "../../../Components/Modals/StoreMeeting";
@@ -65,6 +65,10 @@ export default function SprintDetail() {
     listMeetings();
   };
 
+  const closeSprintAction = () => {
+    closeSprint(id, () => showSprint(id, sprintId, setSprint));
+  };
+
   useEffect(() => {
     showProject(id, setProject);
     showSprint(id, sprintId, setSprint);
@@ -92,7 +96,9 @@ export default function SprintDetail() {
                 <ItemTitle>
                   Sprint #{sprint.id} - {sprint.title}
                 </ItemTitle>
-                <ButtonDanger>Encerrar Sprint</ButtonDanger>
+                {!sprint.end_at && (
+                  <ButtonDanger onClick={closeSprintAction}>Encerrar Sprint</ButtonDanger>
+                )}
               </Row40>
               <Row5>Aberto em {sprint.created_at}</Row5>
               <CardsRow>
