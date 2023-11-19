@@ -51,10 +51,17 @@ export const Participants = styled.div`
   .participant {
     display: flex;
     align-items: center;
-    gap: 20px;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .participant-name {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .participant-name>span {
     font-size: 12px;
     color: ${Colors.secondary900};
   }

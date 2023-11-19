@@ -53,7 +53,7 @@ export default function BacklogItem() {
   };
 
   const onStageChange = event => {
-    changeItemStage(itemId, event.target.value, () => showItem(itemId, setItem));
+    changeItemStage(itemId, event.target.value, () => itemHistory(itemId, setHistory));
   };
 
   const subtmitAction = data => {

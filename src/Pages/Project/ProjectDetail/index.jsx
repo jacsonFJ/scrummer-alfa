@@ -38,8 +38,10 @@ export default function ProjectDetail() {
               </SectionTitle>
               {project.users.map(user => (
                 <div key={user.id} className='participant'>
-                  <ImgCircle size="34px" src={user.picture_url} />
-                  <span className='participant-name'>{user.name}</span>
+                  <div className='participant-name'>
+                    <ImgCircle size="34px" src={user.picture_url} />
+                    <span >{user.name}</span>
+                  </div>
                   <TagBlue>{user.role}</TagBlue>
                 </div>
               ))}
