@@ -7,8 +7,8 @@ export default function http() {
     headers.Authorization = `Bearer ${token}`;
 
   return axios.create({
-    baseURL: 'http://localhost',
-    // baseURL: 'https://jacsonfj.com.br',
+    // baseURL: 'http://localhost',
+    baseURL: 'https://jacsonfj.com.br',
     headers,
   });
 };
